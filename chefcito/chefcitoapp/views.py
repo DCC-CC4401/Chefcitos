@@ -1,11 +1,11 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from .models import User
 from django.contrib.auth import authenticate, login,logout
 
 def inicio(request):
     if request.method == "GET":
         return render(request, "chefcitoapp/index.html")
-
-from django.http import HttpResponseRedirect
 
 
 def register_user(request):

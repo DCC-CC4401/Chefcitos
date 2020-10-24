@@ -12,7 +12,7 @@ class User(AbstractUser):
     experiencias = [('Solo Maruchan','Solo Maruchan'),('Primeros platos','Primeros platos'), ('Cocinero/a/e Amateur','Cocinero/a/e Amateur'),('Chef Profesional','Chef Profesional')]
     experiencia = models.CharField(max_length=100,choices=experiencias)
 
-'''class Ingrediente(models.Model):
+class Ingrediente(models.Model):
     ingrediente_id=models.AutoField(primary_key=True)
     ingrediente_nombre=models.CharField(max_length=20)
     vegano=models.BooleanField(default=False)
@@ -44,4 +44,4 @@ class Receta(models.Model):
 class CalificaReceta(models.Model):
     nombre_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     receta_id = models.ForeignKey(Receta, on_delete=models.CASCADE)
-    nota=models.DecimalField({'min_value': 0, 'max_value':10.0})'''
+    nota=models.DecimalField(decimal_places=1, max_digits=3)
