@@ -27,10 +27,9 @@ def register_user(request):
         #Redireccionar la página /tareas
         return HttpResponseRedirect('/tareas')
 
-from django.contrib.auth import authenticate, login,logout
 def login_user(request):
     if request.method == 'GET':
-        return render(request,"todoapp/login.html")
+        return render(request,"chefcitoapp/login.html")
     if request.method == 'POST':
         username = request.POST['username']
         contraseña = request.POST['contraseña']
