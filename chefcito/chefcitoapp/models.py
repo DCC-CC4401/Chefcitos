@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 
+
 class User(AbstractUser):
     descripcion = models.TextField(blank = True)
     fecha_nacimiento = models.DateField(null = True, blank = True)
@@ -11,6 +12,7 @@ class User(AbstractUser):
     avatar = models.FileField(upload_to='avatars/',blank=True, null= True)
     experiencias = [('Solo Maruchan','Solo Maruchan'),('Primeros platos','Primeros platos'), ('Cocinero/a/e Amateur','Cocinero/a/e Amateur'),('Chef Profesional','Chef Profesional')]
     experiencia = models.CharField(max_length=100,choices=experiencias)
+
 
 class Ingrediente(models.Model):
     ingrediente_id=models.AutoField(primary_key=True)

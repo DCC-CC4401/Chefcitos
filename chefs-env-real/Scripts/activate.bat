@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Roberto\Desktop\Segundo-Semestre-2020\Ingeniería de Software\Proyecto\2020-2-grupo5\chefs-env
+set VIRTUAL_ENV=C:\Users\Roberto\Desktop\Segundo-Semestre-2020\Ingeniería de Software\Proyecto\nuevo-repository\chefcitos\chefs-env-real
 
 if not defined PROMPT set PROMPT=$P$G
 
@@ -16,7 +16,7 @@ if defined _OLD_VIRTUAL_PROMPT set PROMPT=%_OLD_VIRTUAL_PROMPT%
 if defined _OLD_VIRTUAL_PYTHONHOME set PYTHONHOME=%_OLD_VIRTUAL_PYTHONHOME%
 
 set _OLD_VIRTUAL_PROMPT=%PROMPT%
-set PROMPT=(chefs-env) %PROMPT%
+set PROMPT=(chefs-env-real) %PROMPT%
 
 if defined PYTHONHOME set _OLD_VIRTUAL_PYTHONHOME=%PYTHONHOME%
 set PYTHONHOME=

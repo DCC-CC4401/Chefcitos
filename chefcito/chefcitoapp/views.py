@@ -4,13 +4,14 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from .models import User, Ingrediente, Receta, CalificaReceta
 from django.contrib.auth import authenticate, login,logout
+from .forms import UserForm
 
 def inicio(request):
     if request.method == "GET":
         return render(request, "chefcitoapp/index.html")
 
 
-def register_user(request):
+def register_user1(request):
     if request.method == 'GET': #Si estamos cargando la página
         return render(request, "todoapp/register_user.html") #Mostrar el template
 
@@ -38,14 +39,14 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña)
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/tareas')
+            return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/register')
 
 
 def logout_user(request):
    logout(request)
-   return HttpResponseRedirect('/tareas')
+   return HttpResponseRedirect('/')
 
 # Create your views here.
 
@@ -91,3 +92,43 @@ def see_profile(request):
         else:
             html="<html><body><h1>No ha iniciado sesion</h1>.</body></html>"
             return HttpResponse(html)
+
+
+
+#def editar_perfil(request):
+#    if request.method=='GET':
+#        if request.user.is_authenticated:
+#            the_profile = request.user
+#            return render(request, 'chefcitoapp\edit_perfil.html', the_profile)
+#
+#    if request.method=='POST':
+#       form = UserForm(request.POST or None)
+#        if form.is_valid():
+#
+#            cleaned_data=form.clean()
+#
+#            firstname = form.cleaned_data.get("first_name")
+#            lastname = form.cleaned_data.get("last_name")
+#            emailvalue = form.cleaned_data.get("email")
+
+#            user=request.user
+#            user.
+#            user.save()
+
+
+
+def register_user(request):
+    if request.method == 'GET':
+        if not request.user.is_authenticated:
+            return render(request, 'chefcitoapp\\registrarse.html')
+
+    if request.method=='POST':
+        form =UserForm(request.POST or None)
+
+
+        if form.is_valid():
+            cleaned_data=form.clean()
+            form.save()
+            return render(request, 'chefcitoapp\\index.html')
+
+        return render(request, 'chefcitoapp\\registrarse.html', {'form':form})

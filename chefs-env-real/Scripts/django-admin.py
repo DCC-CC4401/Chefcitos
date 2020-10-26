@@ -1,4 +1,4 @@
-#!c:\users\roberto\desktop\segundo-semestre-2020\ingeniería de software\proyecto\2020-2-grupo5\the-chefs-env\scripts\python.exe
+#!c:\users\roberto\desktop\segundo-semestre-2020\ingeniería de software\proyecto\nuevo-repository\chefcitos\chefs-env-real\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
