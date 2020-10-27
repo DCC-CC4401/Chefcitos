@@ -1,9 +1,8 @@
 body{
     color: #3f4a53;
-    margin-top:20px;
 }
 .section {
-    padding: 100px 0;
+    padding: 10px 0;
     position: relative;
 }
 .gray-bg {
@@ -23,8 +22,21 @@ img {
   font-weight: 700;
   margin: 0 0 6px;
 }
+
+.about-text h4 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
 @media (max-width: 767px) {
   .about-text h3 {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-text h4 {
     font-size: 35px;
   }
 }
@@ -43,7 +55,7 @@ img {
 }
 .about-text p mark {
   font-weight: 600;
-  color: #20247b;
+  color: #145a5a;
 }
 
 .about-list {
@@ -53,7 +65,7 @@ img {
   padding: 5px 0;
 }
 .about-list label {
-  color: #20247b;
+  color: #145a5a;
   font-weight: 600;
   width: 110px;
   margin: 0;
@@ -67,12 +79,12 @@ img {
   right: 11px;
   width: 1px;
   height: 12px;
-  background: #20247b;
-  -moz-transform: rotate(15deg);
+  background: #145a5a;
+  /*-moz-transform: rotate(15deg);
   -o-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
-  transform: rotate(15deg);
+  transform: rotate(15deg);*/
   margin: auto;
   opacity: 0.5;
 }
@@ -116,8 +128,40 @@ mark {
     color: currentColor;
 }
 .theme-color {
-    color: #fc5356;
+    color: #ff0080;
 }
 .dark-color {
-    color: #20247b;
+    color: #145a5a;
+}
+
+.fotoperfil-edit {
+  object-fit: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  border-color: lightgray;
+  border-style: none;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+  content: "Examinar";
+}
+
+.form-group span {
+  display: none;
+  font-size:10pt;
+  color: red;
+}
+.custom-file span {
+display: none;
+font-size:10pt;
+color: red;
+}
+.fotoperfil {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  border-radius: 10%;
+  border-color: lightgray;
+  border-style: none;
 }

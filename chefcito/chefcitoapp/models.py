@@ -11,6 +11,9 @@ class User(AbstractUser):
         unique_together = ['email']
     avatar = models.FileField(upload_to='avatars/',blank=True, null= True)
     experiencias = [('Solo Maruchan','Solo Maruchan'),('Primeros platos','Primeros platos'), ('Cocinero/a/e Amateur','Cocinero/a/e Amateur'),('Chef Profesional','Chef Profesional')]
+    exp = []
+    for i in experiencias:
+        exp.append(i[0])
     experiencia = models.CharField(max_length=100,choices=experiencias)
 
     # elecciones = [(1,'Si'),(0,'No')]
