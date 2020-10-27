@@ -4,37 +4,36 @@
 
 {%block content %}
 
-<div class="container">
+<div class="container" style="margin-top:2em">
     <div class="row justify-content-center">
         <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Registrarse</div>
+            <div class="card-header h3">Registrarse</div>
                 <div class="card-body">
                     {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <form class="form-horizontal" method="post" action="#">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="form-group ">
+                                <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                            </div>
+                        </form>
                     </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
                 </div>
-            {% endfor %}
-        {% endif %}
-            <div class="form-group">
-                <form class="form-horizontal" method="post" action="#">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="form-group ">
-                        <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                    </div>
-                </form>
-            </div>
-    
-            </div>
             </div>
         </div>
     </div>
