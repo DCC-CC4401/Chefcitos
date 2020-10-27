@@ -7,25 +7,6 @@ class UserForm(forms.ModelForm):
     class Meta:
         model= User
         fields = ['first_name', 'last_name', 'fecha_nacimiento','username', 'password', 'email', 'descripcion', 'experiencia', 'avatar', 'vegano', 'vegetariano', 'celiaco', 'diabetico', 'intolerancia_lactosa']
-
-        widget = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'fecha_nacimiento': forms.DateInput(attrs={'class': 'form-control'}),
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
-            'experiencia': forms.Select(attrs={'class': 'form-control'}),
-            'avatar': forms.FileInput(attrs={'class': 'form-control'}),
-            'experiencia': forms.Select(attrs={'class': 'form-control'}),
-            'vegetariano': forms.CheckboxInput(attrs={'class': 'form-control'}),
-            'vegano': forms.CheckboxInput(attrs={'class': 'form-control'}),
-            'celiaco': forms.CheckboxInput(attrs={'class': 'form-control'}),
-            'diabetico': forms.CheckboxInput(attrs={'class': 'form-control'}),
-            'intolerancia_lactosa': forms.CheckboxInput(attrs={'class': 'form-control'}),
-        
-        }
         
     def save(self, commit=True):
         # Save the provided password in hashed format
@@ -35,10 +16,22 @@ class UserForm(forms.ModelForm):
             user.save()
         return user
 
-    
-    password= forms.CharField(widget=forms.PasswordInput, min_length=6, max_length=12)
+    first_name=forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fecha_nacimiento = forms.DateField(widget=forms.SelectDateWidgets(attrs={'class': 'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password= forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}), min_length=6, max_length=12)
+    email=forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
+    descripcion=forms.Textarea()
     experiencias = [('Solo Maruchan', 'Solo Maruchan'), ('Primeros platos', 'Primeros platos'),
                     ('Cocinero/a/e Amateur', 'Cocinero/a/e Amateur'), ('Chef Profesional', 'Chef Profesional')]
-    experiencia = forms.ChoiceField(widget=forms.RadioSelect, choices=experiencias)
-    fecha_nacimiento =  forms.DateField(widget=forms.SelectDateWidget(years = range(1990, timezone.now().year+1)))
+
+    experiencia = forms.ChoiceField(widget=forms.Select(), choices=experiencias)
+    vegetariano=forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    vegano = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    diabetico = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    celiaco = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    intolerancia_lactosa = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+
+
 

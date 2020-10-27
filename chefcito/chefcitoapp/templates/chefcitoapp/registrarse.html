@@ -24,15 +24,20 @@
                             </div>
                         {% endfor %}
                     {% endif %}
-                    <div class="form-group">
-                        <form class="form-horizontal" method="post" action="#">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="form-group ">
-                                <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                            </div>
-                        </form>
-                    </div>
+                    <form class="form-horizontal" method="post" action="#">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+                            {{ field }}
+                            
+
+                        </div>
+                        {% endfor %}
+                        <div class="form-group ">
+                            <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
