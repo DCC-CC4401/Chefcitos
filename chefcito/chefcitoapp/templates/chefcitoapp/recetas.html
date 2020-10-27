@@ -1,0 +1,45 @@
+{% extends 'chefcitoapp/menu.html' %}
+
+{% block title %} Recetas {% endblock %}
+
+{%block content %}
+    <div class="container" style="margin-top: 2em">
+        <div id="encabezado" class="row">
+            <div  class="col-8">
+            <!-- Encabezado de la página-->
+                <h1>Recetas</h1>
+                <hr>
+            <!-- Fin encabezado -->
+            </div>
+        </div>
+        <div id="segunda-parte" >
+
+            <div class="card" id="filtrar-receta">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="orden">Ordenar por: </label>
+                        <select name="orden" id="orden" class="form-control" onchange="filtrar()" >
+                            <option value="" selected="selected">Seleccione una opción</option>
+                            <option value="fecha">Fecha</option>
+                            <option value="valoracion">Valoración</option>
+                        </select>
+                    </div>
+
+                        
+                </div>
+            </div>  
+            
+            <ul class="list-group">
+                {% for receta in recetas %} <!-- django template lang - for loop -->
+                    <li class="list-group-item">
+                        <div>{{receta.receta_nombre}}</div>
+                        <span><!-- falta agregar imagen--></span>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+        </div> <!-- div segunda parte -->
+    </div><!-- container -->
+
+
+{% endblock %}

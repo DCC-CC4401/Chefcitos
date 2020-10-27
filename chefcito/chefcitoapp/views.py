@@ -132,3 +132,33 @@ def register_user(request):
             return render(request, 'chefcitoapp\\index.html')
 
         return render(request, 'chefcitoapp\\registrarse.html', {'form':form})
+
+def agregar_receta(request):
+
+    ingredientes = Ingrediente.objects.all() 
+     
+    if request.method == "GET":
+        return render(request, "chefcitoapp/agregar_receta.html", {"ingredientes": ingredientes})
+ 
+    elif request.method == 'POST': #Si estamos recibiendo el form de registro
+        if "recetaAdd" in request.POST: 
+            if request.user.is_authenticated:
+                receta_nombre = request.POST['receta_nombre']
+                preparacion = request.POST['preparacion']
+                duracion = request.POST['duracion']
+                receta_foto = request.POST['receta_foto']
+                descripcion = request.POST['descripcion']
+                ingredientes_receta = request.POST['ingredientes[]']
+
+                receta = Receta(receta_nombre=receta_nombre, preparacion=preparacion, duracion=duracion, receta_foto=receta_foto, descripcion=descripcion, ingrediente=ingredientes_receta, nombre_usuario=request.user)
+                receta.save() 
+
+            return HttpResponseRedirect('/agregar_receta')
+
+def recetas(request):
+
+    recetas = Receta.objects.all() 
+
+    if request.method == "GET":
+        return render(request, "chefcitoapp/recetas.html", {"recetas": recetas})
+    
