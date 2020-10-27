@@ -1,6 +1,7 @@
 from django import forms
 from .models import User, Ingrediente, CalificaReceta, Receta
 from django.db import models
+from django.utils import timezone
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -39,5 +40,5 @@ class UserForm(forms.ModelForm):
     experiencias = [('Solo Maruchan', 'Solo Maruchan'), ('Primeros platos', 'Primeros platos'),
                     ('Cocinero/a/e Amateur', 'Cocinero/a/e Amateur'), ('Chef Profesional', 'Chef Profesional')]
     experiencia = forms.ChoiceField(widget=forms.RadioSelect, choices=experiencias)
-    fecha_nacimiento =  forms.DateField(widget=forms.SelectDateWidget)
+    fecha_nacimiento =  forms.DateField(widget=forms.SelectDateWidget(years = range(1990, timezone.now().year+1)))
 
