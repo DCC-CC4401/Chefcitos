@@ -1,10 +1,20 @@
 {% extends 'chefcitoapp/menu.html' %}
+
 {% block title %} Inicio de sesión {% endblock %}
 {%block content %}
          <div class="container">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <div class='alert {{message.tags}}'>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
              <div class="content">
                  <h1> Iniciar Sesión </h1>
-                 <form method="post" >
+                 <form method="post" action="##" >
                      {% csrf_token %}
                      <div class="form-group">
                          <label for="nombre_usuario">Nombre</label>

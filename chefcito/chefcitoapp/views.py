@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from .models import User, Ingrediente, Receta, CalificaReceta
 from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.password_validation import validate_password
 from .forms import UserForm
 
 def inicio(request):
@@ -11,24 +13,6 @@ def inicio(request):
         return render(request, "chefcitoapp/index.html")
 
 
-def register_user1(request):
-    if request.method == 'GET': #Si estamos cargando la página
-        return render(request, "todoapp/register_user.html") #Mostrar el template
-
-    elif request.method == 'POST': #Si estamos recibiendo el form de registro
-
-        #Tomar los elementos del formulario que vienen en request.POST
-        nombre = request.POST['nombre']
-        contraseña = request.POST['contraseña']
-        apodo = request.POST['apodo']
-        pronombre = request.POST['pronombre']
-        mail = request.POST['mail']
-
-        #Crear el nuevo usuario
-        user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo, pronombre=pronombre)
-
-        #Redireccionar la página /tareas
-        return HttpResponseRedirect('/tareas')
 
 def login_user(request):
     if request.method == 'GET':
@@ -52,31 +36,7 @@ def logout_user(request):
 
 
 def see_profile(request):
-    """
-       Authenticate against the settings ADMIN_LOGIN and ADMIN_PASSWORD.
-
-       Use the login name and a hash of the password. For example:
-
-       ADMIN_LOGIN = 'admin'
-       ADMIN_PASSWORD = 'pbkdf2_sha256$30000$Vo0VlMnkR4Bk$qEvtdyZRWTcOsCnI/oQ7fVOu1XAURIZYoOZ3iq8Dr4M='
-       """
-    def authenticate(self, request, username=None, password=None):
-        login_valid = (settings.ADMIN_LOGIN == username)
-        pwd_valid = check_password(password, settings.ADMIN_PASSWORD)
-        if login_valid and pwd_valid:
-            try:
-                user = User.objects.get(username=username)
-            except User.DoesNotExist:
-                # Create a new user. There's no need to set a password
-                # because only the password from settings.py is checked.
-                user = User(username=username)
-                user.is_staff = True
-                user.is_superuser = True
-                user.save()
-            return user
-        return None
-
-    def get_user(self, user_id):
+    def get_user(user_id):
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
@@ -85,9 +45,9 @@ def see_profile(request):
 
     if request.method=='GET':
         if request.user.is_authenticated:
-            username = request.user.username
-            the_profile=get_user(username)
-            return render(request, 'chefcitoapp\perfil.html',the_profile)
+            username = request.user.id
+            form=get_user(username)
+            return render(request, 'chefcitoapp/perfil.html',{'form':form})
 
         else:
             html="<html><body><h1>No ha iniciado sesion</h1>.</body></html>"
@@ -95,43 +55,45 @@ def see_profile(request):
 
 
 
-#def editar_perfil(request):
-#    if request.method=='GET':
-#        if request.user.is_authenticated:
-#            the_profile = request.user
-#            return render(request, 'chefcitoapp\edit_perfil.html', the_profile)
-#
-#    if request.method=='POST':
-#       form = UserForm(request.POST or None)
-#        if form.is_valid():
-#
-#            cleaned_data=form.clean()
-#
-#            firstname = form.cleaned_data.get("first_name")
-#            lastname = form.cleaned_data.get("last_name")
-#            emailvalue = form.cleaned_data.get("email")
+def editar_perfil(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            the_profile = request.user
+            return render(request, 'chefcitoapp/editar_perfil.html', {'form': the_profile})
 
-#            user=request.user
-#            user.
-#            user.save()
+        if request.method == 'POST':
+            form = UserForm(request.POST or None)
+            if form.is_valid():
+                the_profile = request.user
+                the_profile.first_name = form.cleaned_data["first_name"]
+                the_profile.last_name = form.cleaned_data["last_name"]
+                the_profile.password = form.cleaned_data["password"]
+                the_profile.email = form.cleaned_data["email"]
+                the_profile.fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
+                the_profile.experiencia = form.cleaned_data["experiencia"]
+                the_profile.descripcion = form.cleaned_data["descripcion"]
+                the_profile.save()
+                return render(request, 'chefcitoapp/index.html')
 
+            return render(request, 'chefcitoapp/editar_perfil.html', {'form': form})
 
 
 def register_user(request):
     if request.method == 'GET':
         if not request.user.is_authenticated:
-            return render(request, 'chefcitoapp\\registrarse.html')
+            form = UserForm()
+            return render(request, 'chefcitoapp/registrarse.html', {'form': form})
 
     if request.method=='POST':
         form =UserForm(request.POST or None)
 
 
         if form.is_valid():
-            cleaned_data=form.clean()
-            form.save()
-            return render(request, 'chefcitoapp\\index.html')
+            user=form.save()
+            return render(request, 'chefcitoapp/index.html')
 
-        return render(request, 'chefcitoapp\\registrarse.html', {'form':form})
+        return render(request, 'chefcitoapp/registrarse.html', {'form':form})
+
 
 def agregar_receta(request):
 
@@ -154,6 +116,7 @@ def agregar_receta(request):
                 receta.save() 
 
             return HttpResponseRedirect('/agregar_receta')
+
 
 def recetas(request):
 

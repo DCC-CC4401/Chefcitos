@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
     {% load static %}
-    
+
     <!-- wuuuuu<link rel="stylesheet" type="text/css" href="{% static '/todoapp/style.css' %}">-->
 </head>
 <body>
     <nav class="navbar navbar-dark" style="background-color:#ff0080;">
         <a class="navbar-brand" href="#" style="color: aliceblue;">
-            <img src="http://drive.google.com/uc?export=view&id=1C1oVbqV5pOVhiXTA_7O4oNwA3KVh-yx3" style="height: 60px;"> 
+            <img src="{% static 'chefcitoapp/logo.png' %}" style="height: 60px;">
             Chefcitos
-        </a> 
+        </a>
         <form class="form-inline">
              {% if user.is_authenticated %}
+                    <a href="{% url 'perfil' %}" class="btn btn-outline-light">Ver perfil</a>
                     <a href="{% url 'logout' %}" class="btn btn-outline-light">Cerrar sesión </a>
                 {% else %}
                     <a href="{% url 'register_user' %}" class="btn btn-outline-light">Registrarse</a>
@@ -24,6 +40,7 @@
                 {% endif %}
         </form>
     </nav>
+
     <main>{% block content %}{% endblock %}</main>
 </body>
 
