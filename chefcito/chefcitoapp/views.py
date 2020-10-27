@@ -72,6 +72,7 @@ def editar_perfil(request):
                 the_profile.fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
                 the_profile.experiencia = form.cleaned_data["experiencia"]
                 the_profile.descripcion = form.cleaned_data["descripcion"]
+
                 the_profile.save()
                 return render(request, 'chefcitoapp/index.html')
 
@@ -85,11 +86,11 @@ def register_user(request):
             return render(request, 'chefcitoapp/registrarse.html', {'form': form})
 
     if request.method=='POST':
-        form =UserForm(request.POST or None)
+        form = UserForm(request.POST or None)
 
 
         if form.is_valid():
-            user=form.save()
+            user = form.save()
             return render(request, 'chefcitoapp/index.html')
 
         return render(request, 'chefcitoapp/registrarse.html', {'form':form})

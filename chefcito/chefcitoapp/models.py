@@ -13,6 +13,13 @@ class User(AbstractUser):
     experiencias = [('Solo Maruchan','Solo Maruchan'),('Primeros platos','Primeros platos'), ('Cocinero/a/e Amateur','Cocinero/a/e Amateur'),('Chef Profesional','Chef Profesional')]
     experiencia = models.CharField(max_length=100,choices=experiencias)
 
+    # elecciones = [(1,'Si'),(0,'No')]
+    vegano = models.BooleanField(default=False)
+    vegetariano = models.BooleanField(default=False)
+    diabetico = models.BooleanField(default=False)
+    celiaco = models.BooleanField(default=False)
+    intolerancia_lactosa = models.BooleanField(default=False)
+
 
 class Ingrediente(models.Model):
     ingrediente_id=models.AutoField(primary_key=True)

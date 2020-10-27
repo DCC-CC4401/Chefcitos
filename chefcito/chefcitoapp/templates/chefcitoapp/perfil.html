@@ -1,100 +1,97 @@
 {% extends 'chefcitoapp/menu.html' %}
 
-{% block title %} PERFIL {% endblock %}
+{% block title %} Perfil {% endblock %}
 
 {%block content %}
-<hr>
-<div class="container bootstrap snippet">
-    <div class="row">
-  		<div class="col-sm-10"><h1>{{ username }}</h1></div>
-    </div>
-    <div class="row">
-  		<div class="col-sm-3"><!--left col-->
+
+<section class="section about-section gray-bg" id="about">
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6">
+                <div class="about-text go-to">
+                    <h3 class="dark-color">{{ form.first_name }} {{ form.last_name }}</h3> <!-- aqui podriamos poner el nombre de la persona con su usuario entre parentesis -->
+                    <h6 class="theme-color lead">{{ form.experiencia }}</h6> <!-- aqui su nivel de experiencia -->
+                    <p>{{ form.descripcion }}</p>
+                    <div class="row about-list">
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Username</label>
+                                <p>{{ form.username }}</p>
+                            </div>
+                            <div class="media">
+                                <label>Email</label>
+                                <p>{{form.email}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Cumpleaños</label>
+                                <p>{{ form.fecha_nacimiento }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="dark-color"><strong> Preferencias de Dieta</strong></p>
+                            <ul>
+                                {% if form.vegetariano %}
+                                <li>Vegetariano</li>
+                                {% endif %}
+
+                                {% if form.vegano %}
+                                <li>Vegano</li>
+                                {% endif %}
+
+                                {% if form.diabetico %}
+                                <li>Diabetico</li>
+                                {% endif %}
+
+                                {% if form.celiaco %}
+                                <li>Celiaco</li>
+                                {% endif %}
+
+                                {% if form.intolerancia_lactosa %}
+                                <li>Intolerante a la lactosa</li>
+                                {% endif %}
+
+                            </ul>
 
 
-        <div class="text-center">
-            <img src={{ form.avatar }} class="avatar img-circle img-thumbnail" alt="avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-avatar">
+                    <img src="{{form.avatar}}" title="" alt="">
+                </div>
+            </div>
         </div>
-            <br>
-
-            <ul class="list-group">
-            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-            </ul>
-
-        </div><!--/col-3-->
-    	<div class="col-sm-9">
-          <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                <hr>
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label><h4>Nombre: {{ form.first_name }}</h4></class></label>
+        <div class="counter">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="500" data-speed="500">500</h6>
+                        <p class="m-0px font-w-600">Happy Clients</p>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="username"><h4>Username: {{ form.username }}</h4></label>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="150" data-speed="150">150</h6>
+                        <p class="m-0px font-w-600">Project Completed</p>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="last_name"><h4>Apellido: {{ form.last_name }}</h4></label>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="850" data-speed="850">850</h6>
+                        <p class="m-0px font-w-600">Photo Capture</p>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="password"><h4>Password: {{ form.password }}</h4></label>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="190" data-speed="190">190</h6>
+                        <p class="m-0px font-w-600">Telephonic Talk</p>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="email"><h4>Email: {{ form.email }}</h4></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="tel"><h4>Fecha de Nacimiento: {{ form.fecha_nacimiento  }}</h4></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label><h4>Experiencia: {{ form.experiencia  }}</h4></label>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label for="tel"><h4>Descripcion: {{ Descripcion  }}</h4></label>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <br>
-                        <button href="{% url 'editar_perfil' %}">Editar</button>
-                    </div>
-                </div>
-
-              <hr>
-
-            </div><!--/tab-pane-->
-
-              </div><!--/tab-pane-->
-          </div><!--/tab-content-->
-
-        </div><!--/col-9-->
-    </div><!--/row-->
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

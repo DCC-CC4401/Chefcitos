@@ -4,9 +4,13 @@
 
 {%block content %}
 
-<body>
-<h1>Registrarse</h1>
-{% if form.errors %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Registrarse</div>
+                <div class="card-body">
+                    {% if form.errors %}
             {% for field in form %}
                 {% for error in field.errors %}
                     <div class="alert alert-danger">
@@ -20,13 +24,19 @@
                 </div>
             {% endfor %}
         {% endif %}
-<form class="form" action="##" method="post" id="editForm" name="editForm">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
-</form>
-</body>
+            <div class="form-group">
+                <form class="form-horizontal" method="post" action="#">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group ">
+                        <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    </div>
+                </form>
+            </div>
+    
+            </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
