@@ -6,19 +6,30 @@
 {% load static %}
 <section class="section about-section gray-bg" id="about">
     <div class="container">
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <div class='alert {{message.tags}}'>
+                {{message}}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="row align-items-center flex-row-reverse">
             <div class="col-lg-8">
                 <div class="about-text go-to">
                     <div class="row" style="vertical-align: middle;">
                         <div class="col" style="max-width: max-content;">
-                            <h3 class="dark-color" style="align-self: flex-end;">{{ form.first_name }} {{ form.last_name }}</h3>
+                            <h3 class="dark-color" style="align-self: flex-end;">{{ form.first_name }}
+                                {{ form.last_name }}</h3>
                         </div>
 
                         <div class="col" style="max-width: max-content; align-self: center;">
                             <a href="{% url 'editar_perfil' %}" class="btn btn-outline-dark">Editar perfil</a>
                         </div>
                     </div>
-                    <h6 class="theme-color lead"><i>{{ form.experiencia }}</i></h6> <!-- aqui su nivel de experiencia -->
+                    <h6 class="theme-color lead"><i>{{ form.experiencia }}</i></h6>
+                    <!-- aqui su nivel de experiencia -->
                     <p>{{ form.descripcion }}</p>
                     <div class="row about-list">
                         <div class="col-md-6">
@@ -68,15 +79,15 @@
             <div class="col-lg-4" style="width: 410px;">
                 <div class="about-avatar">
                     {% if user.avatar %}
-                        <img src="{{user.avatar.url}}" class="fotoperfil">
+                    <img src="{{user.avatar.url}}" class="fotoperfil">
                     {% else %}
-                        <img src="{% static 'chefcitoapp/logo.png' %}" class="fotoperfil">
+                    <img src="{% static 'chefcitoapp/logo.png' %}" class="fotoperfil">
                     {% endif %}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 </section>
 
