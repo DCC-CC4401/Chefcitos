@@ -32,7 +32,7 @@
 							{% if user.avatar %}
 							<img src="{{ user.avatar.url }}" class="fotoperfil-edit">
 							{% else %}
-							<img src="{% static 'chefcitoapp/logo.png' %}" class="fotoperfil-edit">
+							<img src="{% static 'chefcitoapp/img/perfil_default.png' %}" class="fotoperfil-edit">
 							{% endif %}
 						</div>
 						<div class="col">
@@ -45,7 +45,7 @@
 							</div>
 							<!-- <label for="exampleFormControlFile1">Cambiar Foto:</label>
                       <input name="adjunto" type="file" class="form-control-file" id="exampleFormControlFile1" style="margin-top: 10px;" required> -->
-							s<button type="submit" name="fotoperfil-edit" class="btn btn-primary"
+							<button type="submit" name="fotoperfil-edit" class="btn btn-primary"
 								style="margin-top: 30px; width: 100%;">Guardar Foto</button>
 						</div>
 					</div>

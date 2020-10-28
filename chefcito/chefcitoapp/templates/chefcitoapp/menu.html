@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -10,7 +9,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
@@ -22,60 +20,27 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
     {% load static %}
 
-    <style>
-        #estrellitas {width: 250px;margin: 0 auto; padding: 10px; border: 1px solid#d9d9d9; margin-left: 0; border-radius: 5px;}
-      
-        #estrellitas {text-align: center;}
-        #estrellitas label {font-size: 15px;}
-        input[type="radio"] {display: none;}
-        label {
-            color: black;
-            margin-bottom: 0;
-        }
-        .clasificacion {
-          direction: rtl;
-          unicode-bidi: bidi-override;
-          margin-bottom: 0;
-        }
-
-        /*
-        label:hover,
-        #label:hover ~ label {color: orange;}
-        #input[type="radio"]:checked ~ label {color: orange;}
-        */
-
-
-        .grid-container{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
-        }
-
-        #tiempo{
-            margin-bottom: 10px;
-        }
-
-        #imagenrec{
-            display: block;
-            padding: 0;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-right: 50px;
-        }
-        #btncoment{
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-    </style> 
-    
-         
-
+    <link rel="stylesheet" type="text/css" href="{% static '/chefcitoapp/css/style_perfil.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'chefcitoapp/img/logo_provisorio_soloIcon.png' %}">
+</head>
 <body>
-    <nav class="navbar navbar-dark" style="background-color:#ff0080;">
+    <nav class="navbar navbar-dark navbar-expand-lg" style="background-color:#ff0080;">
         <a class="navbar-brand" href="#" style="color: aliceblue;">
-            <img src="{% static 'chefcitoapp/logo.png' %}" style="height: 60px;"> 
-            Chefcitos
+            <img src="{% static 'chefcitoapp/img/logo_provisorio.png' %}" style="height: 40px;"> 
+            
         </a> 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto navbar-default">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/" style="color: white; "><i class="fa fa-home"></i> Inicio</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'agregar_receta' %}" style="color: white;" ><i class="fa fa-upload"></i> Subir Receta</a>
+            </li>
+            {% endif %}
+        </ul>
+
         <form class="form-inline">
              {% if user.is_authenticated %}
                     <a href="{% url 'perfil' %}" class="btn btn-outline-light" style="margin-right: 5px;">Ver perfil</a>
@@ -85,10 +50,10 @@
                     <a href="{% url 'login' %}" class="btn btn-outline-light">Iniciar Sesión</a>
                 {% endif %}
         </form>
+        </div>
     </nav>
     
     <main>{% block content %}{% endblock %}</main>
 </body>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>

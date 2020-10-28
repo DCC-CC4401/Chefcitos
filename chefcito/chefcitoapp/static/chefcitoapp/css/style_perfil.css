@@ -165,3 +165,61 @@ color: red;
   border-color: lightgray;
   border-style: none;
 }
+
+.imagen-inicio {
+  object-fit: cover;
+  width: 100%;
+  height: 500px;
+  border-radius: 5%;
+}
+
+.formulario h6{
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 3px;
+  color: #999999;
+}
+
+#estrellitas {width: 250px;margin: 0 auto; padding: 10px; border: 1px solid#d9d9d9; margin-left: 0; border-radius: 5px;}
+      
+#estrellitas {text-align: center;}
+#estrellitas label {font-size: 15px;}
+input[type="radio"] {display: none;}
+label {
+    color: black;
+    margin-bottom: 0;
+}
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  margin-bottom: 0;
+}
+
+/*
+label:hover,
+#label:hover ~ label {color: orange;}
+#input[type="radio"]:checked ~ label {color: orange;}
+*/
+
+
+.grid-container{
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-gap: 20px;
+}
+
+#tiempo{
+    margin-bottom: 10px;
+}
+
+#imagenrec{
+    display: block;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 50px;
+}
+#btncoment{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

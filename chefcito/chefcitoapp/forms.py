@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class DateInputtrue(forms.DateInput):
-    input_type = 'date
+    input_type = 'date'
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -32,7 +32,7 @@ class UserForm(forms.ModelForm):
 
         if password != confirm_password:
             raise forms.ValidationError(
-                "password and confirm_password does not match"
+                "Las contraseñas no coinciden"
             )
 
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ingrese su nombre..'}))
@@ -49,11 +49,11 @@ class UserForm(forms.ModelForm):
                     ('Cocinero/a/e Amateur', 'Cocinero/a/e Amateur'), ('Chef Profesional', 'Chef Profesional')]
 
 
-    experiencia = forms.ChoiceField(required=False, widget=forms.Select(), choices=experiencias)
+    experiencia = forms.ChoiceField(required=False, widget=forms.Select(attrs={'class': 'custom-select'}), choices=experiencias)
     vegetariano = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
     vegano = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
     diabetico = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
     celiaco = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
     intolerancia_lactosa = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
-    avatar=forms.FileField(required=False, )
+    avatar=forms.FileField(required=False)
 

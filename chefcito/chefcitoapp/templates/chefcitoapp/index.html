@@ -3,91 +3,39 @@
 {% block title %} Inicio tareas {% endblock %}
 
 {%block content %}
-       <div class="container" style="margin-top: 2em">
-        {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <div class='alert {{message.tags}}'>
-                            {{message}}
-                        </div>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            <div id="encabezado" class="row">
-                <div  class="col-8">
-                <!-- Encabezado de la página-->
-                   <h1>chefcitosApp</h1>
-                   <p class="tagline">a Django todo app</p>
-               <!-- Fin encabezado -->
-                </div>
-                <div class="col">
-                    {% if  user.is_authenticated %}
-                        <h2>Usuaria: {{ user.apodo }}</h2>
+{% load static %}
+<div class="container" style="margin-top: 2em">
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <div class='alert {{message.tags}}'>
+            {{message}}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div id="encabezado" class="row">
+        <img src="{% static 'chefcitoapp/img/fondoinicial.png' %}" class="imagen-inicio" style="object-fit: cover;
+                width: 100%;
+                height: 500px;
+                border-radius: 5%;"> <!-- este style esta en el css, pero no lo tomaba así que lo escibi aqui-->
+    </div>
+    <div id="segunda-parte" class="row"> <!-- no se como mostrar recetas, nada funciono :( -->
+        {% for r in chefcitoapp.receta %}
+        <div class="card col" id="nueva-tarea">
+            <div class="card-body">
+                <label>{{ r.name }}</label>
+                <img src="{{ receta.receta_foto.url }}">
+                {% for user in users %}
+                    {% if user.id == receta.nombre_usuario_id %}
+                        Subida por {{ chefcitoapp.User.Receta.nombre_usuario_id.username }}
                     {% endif %}
-
-                </div>
+                {% endfor %}
             </div>
-           <div id="segunda-parte" >
-               <form action="" method="post">
-                   {% csrf_token %} <!-- csrf token for basic security -->
-                   <!-- Formulario de nueva tarea-->
-                   <div class="card" id="nueva-tarea">
-                       <div class="card-header">
-                            Nueva Tarea
-                       </div>
-                       <div class="card-body">
-                            <div class="form-group">
-                               <label for="titulo">Titulo de la tarea <span class="badge badge-secondary">Obligatorio</span></label>
-                               <input type="text" id="titulo" class="form-control" placeholder="¿Qué tienes que hacer?" name="titulo" required>
-                           </div>
-                           <div class="form-group">
-                               <label for="contenido">Contenido</label>
-                               <textarea  id="contenido" class="form-control" placeholder="¿Describe tu tarea?" name="contenido" required></textarea>
-                           </div>
-                           <div class="form-group">
-                               <label for="categoria">Categoria</label>
-                               <select id="categoria"  class="form-control" name="selector_categoria">
-                               <option class="disabled" value="">Elige una categoría</option>
-                               {% for categoria in categorias %}
-                                   <option class="" value="{{ categoria.nombre }}" name="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
-                               {% endfor %}
-                               </select>
-                           </div>
-                            <!-- Fin formulario de nueva tarea -->
-                            <!-- Botones para agregar o eliminar tarea -->
-                           <div id="botones">
-                               <button class="btn btn-primary" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Agregar tarea</button>
-                               <button disabled class="btn btn-danger" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="fa fa-trash-o icon"></i>Eliminar tarea</button>
-                           </div>
-                            <!-- Fin botones para agregar o eliminar tarea -->
-                           </div>
-                       </div>
-                   <div class="card" id="tareas-existentes" style="margin-top: 10px">
-                       <div class="card-header">
-                           Mis tareas
-                       </div>
-                        <!-- Lista de las tareas existentes -->
-
-                       <ul class="list-group list-group-flush">
-                       {% for tarea in tareas %} <!-- django template lang - for loop -->
-                           <li class="list-group-item">
-                              <div>
-                                   <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ tarea.id }}" value="{{ tarea.id }}">
-                                    <label for="{{ tarea.id }}"><span class="complete-">{{ tarea.titulo }}</span></label>
-                                   <span class="badge badge-info">{{ tarea.categoria }}</span>
-                            </div>
-                               <div>
-                                   <p>{{tarea.contenido}}</p>
-                               </div>
-
-                           </li>
-                       {% endfor %}
-                       </ul>
-                        <!-- Fin de la lista de tareas existentes-->
-                   </div>
-               </form>
-           </div> <!-- div segunda parte -->
-       </div><!-- container -->
+        </div>
+        {% endfor %}
+    </div> <!-- div segunda parte -->
+</div><!-- container -->
 
 
 {% endblock %}

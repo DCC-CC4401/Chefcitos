@@ -41,10 +41,12 @@
                                 <label>Email</label>
                                 <p>{{form.email}}</p>
                             </div>
+                            {% if form.fecha_nacimiento %}
                             <div class="media">
                                 <label>Cumpleaños</label>
                                 <p>{{ form.fecha_nacimiento }}</p>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="col-md-6">
                             <p class="dark-color"><strong> Preferencias de Dieta</strong></p>
@@ -81,7 +83,7 @@
                     {% if user.avatar %}
                     <img src="{{user.avatar.url}}" class="fotoperfil">
                     {% else %}
-                    <img src="{% static 'chefcitoapp/logo.png' %}" class="fotoperfil">
+                    <img src="{% static 'chefcitoapp/img/perfil_default.png' %}" class="fotoperfil">
                     {% endif %}
                 </div>
             </div>

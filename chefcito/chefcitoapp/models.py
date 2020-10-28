@@ -26,7 +26,7 @@ class User(AbstractUser):
 
 class Ingrediente(models.Model):
     ingrediente_id=models.AutoField(primary_key=True)
-    ingrediente_nombre=models.CharField(max_length=20)
+    ingrediente_nombre=models.CharField(max_length=100)
     vegano=models.BooleanField(default=False)
     vegetariano=models.BooleanField(default=False)
     diabetico=models.BooleanField(default=False)
@@ -34,7 +34,7 @@ class Ingrediente(models.Model):
     int_lactosa=models.BooleanField(default=False)
 
     def __str__(self):
-        return self.ingrediente_id
+        return str(self.ingrediente_id)
 
 
 
@@ -44,7 +44,7 @@ class Receta(models.Model):
 
     preparacion=models.TextField(max_length=1300)
     duracion = models.TimeField()
-    receta_foto=models.ImageField(upload_to='fotos_recetas')
+    receta_foto=models.ImageField(upload_to='fotos_recetas/')
     fecha_publ=models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
     descripcion=models.TextField()
     ingrediente=models.ManyToManyField(Ingrediente)
