@@ -7,6 +7,8 @@ from .models import User, Ingrediente, Receta, CalificaReceta
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.password_validation import validate_password
 from .forms import UserForm
+from datetime import *
+import os
 
 def inicio(request):
     if request.method == "GET":
@@ -23,9 +25,12 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña)
         if usuario is not None:
             login(request,usuario)
+            messages.success(request, 'Bienvenid@ ' + usuario.username)
             return HttpResponseRedirect('/')
         else:
+            messages.error(request, 'Error al iniciar sesión')
             return HttpResponseRedirect('/register')
+
 
 
 def logout_user(request):
@@ -33,8 +38,6 @@ def logout_user(request):
    return HttpResponseRedirect('/')
 
 # Create your views here.
-
-
 def see_profile(request):
     def get_user(user_id):
         try:
@@ -54,7 +57,6 @@ def see_profile(request):
             return HttpResponse(html)
 
 
-
 def editar_perfil(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -62,22 +64,41 @@ def editar_perfil(request):
             return render(request, 'chefcitoapp/editar_perfil.html', {'form': the_profile})
 
         if request.method == 'POST':
-            form = UserForm(request.POST or None)
-            if form.is_valid():
-                the_profile = request.user
-                the_profile.first_name = form.cleaned_data["first_name"]
-                the_profile.last_name = form.cleaned_data["last_name"]
-                the_profile.password = form.cleaned_data["password"]
-                the_profile.email = form.cleaned_data["email"]
-                the_profile.fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
-                the_profile.experiencia = form.cleaned_data["experiencia"]
-                the_profile.descripcion = form.cleaned_data["descripcion"]
+            # form = UserForm(request.POST or None)
+            # if form.is_valid():
+            the_profile = request.user
+            if 'fotoperfil-edit' in request.POST:  # Edit Picture
 
+                if request.FILES['adjunto']:
+                    old = the_profile.avatar
+                    the_profile.avatar = request.FILES['adjunto']
+                    the_profile.avatar.name = the_profile.username + "##" + str(datetime.now()) + ".png"
+                    print(the_profile.avatar.url)
+                    if str(old) != '':
+                        try:
+                            os.remove(os.path.join(AVATAR_ROOT, old.name))
+                        except:
+                            print("error")
+                    messages.success(request, 'Foto de perfil actualizada! :D')
                 the_profile.save()
-                return render(request, 'chefcitoapp/index.html')
+                return HttpResponseRedirect(request.path)
+            else:
+                the_profile = request.user
+                the_profile.first_name = request.POST["Nombre"]
+                the_profile.last_name = request.POST["Apellido"]
+                the_profile.fecha_nacimiento = request.POST["Nacimiento"]
+                the_profile.experiencia = request.POST["Experiencia"]
+                the_profile.descripcion = request.POST["Descripcion"]
 
-            return render(request, 'chefcitoapp/editar_perfil.html', {'form': form})
+                the_profile.vegetariano = bool(request.POST.get('Vegetariano', False))
+                the_profile.vegano = bool(request.POST.get('Vegano', False))
+                the_profile.diabetico = bool(request.POST.get('Diabetico', False))
+                the_profile.celiaco = bool(request.POST.get('Celiaco', False))
+                the_profile.intolerancia_lactosa = bool(request.POST.get('int_lactosa', False))
 
+            the_profile.save()
+            messages.success(request, 'Perfil actualizado! c:')
+            return HttpResponseRedirect('/perfil')  # al guardar redirige al perfil(???)
 
 def register_user(request):
     if request.method == 'GET':
@@ -91,7 +112,7 @@ def register_user(request):
 
         if form.is_valid():
             user = form.save()
-            return render(request, 'chefcitoapp/index.html')
+            return HttpResponseRedirect('/')
 
         return render(request, 'chefcitoapp/registrarse.html', {'form':form})
 
