@@ -27,11 +27,12 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña)
         if usuario is not None:
             login(request,usuario)
-            messages.success(request, 'Bienvenide ' + usuario.username + '! uwuwuwuwu')
+            messages.success(request, 'Bienvenid@ ' + usuario.username)
             return HttpResponseRedirect('/')
         else:
-            messages.error(request, 'Pxalalesera, algo ta malito :c')
+            messages.error(request, 'Error al iniciar sesión')
             return HttpResponseRedirect('/register')
+
 
 
 def logout_user(request):
@@ -39,8 +40,6 @@ def logout_user(request):
    return HttpResponseRedirect('/')
 
 # Create your views here.
-
-
 def see_profile(request):
     def get_user(user_id):
         try:
@@ -60,7 +59,6 @@ def see_profile(request):
             return HttpResponse(html)
 
 
-
 def editar_perfil(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -68,6 +66,7 @@ def editar_perfil(request):
             return render(request, 'chefcitoapp/editar_perfil.html', {'form': the_profile})
 
         if request.method == 'POST':
+
             #form = UserForm(request.POST or None)
             #if form.is_valid():
             the_profile = request.user
@@ -104,7 +103,6 @@ def editar_perfil(request):
             the_profile.save()
             messages.success(request, 'Perfil actualizado! c:')
             return HttpResponseRedirect('/perfil') # al guardar redirige al perfil(???) 
-
 
 
 
