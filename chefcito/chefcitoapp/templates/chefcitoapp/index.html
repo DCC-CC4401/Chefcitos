@@ -21,10 +21,13 @@
                 border-radius: 5%;"> <!-- este style esta en el css, pero no lo tomaba así que lo escibi aqui-->
     </div>
     <div id="segunda-parte" class="row"> <!-- no se como mostrar recetas, nada funciono :( -->
-        {% for r in chefcitoapp.receta %}
+
+        {% for receta in recetas %}
+        {{ receta.receta_nombre }}
         <div class="card col" id="nueva-tarea">
             <div class="card-body">
-                <label>{{ r.name }}</label>
+                kjdlad
+                <label>{{ receta.receta_nombre }}</label>
                 <img src="{{ receta.receta_foto.url }}">
                 {% for user in users %}
                     {% if user.id == receta.nombre_usuario_id %}
@@ -35,6 +38,13 @@
         </div>
         {% endfor %}
     </div> <!-- div segunda parte -->
+    <div class="row" style="margin-top: 2em;">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+        <a href="{% url 'recetas' %}" class="btn btn-dark btn-block">Ver todas las recetas</a>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
 </div><!-- container -->
 
 
