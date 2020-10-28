@@ -1,6 +1,6 @@
 {% extends 'chefcitoapp/menu.html' %}
 
-{% block title %} Registro de usuario {% endblock %}
+{% block title %} Registrar usuario {% endblock %}
 
 {%block content %}
 
@@ -11,36 +11,115 @@
             <div class="card-header h3">Registrarse</div>
                 <div class="card-body">
                     {% if form.errors %}
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <div class="alert alert-danger">
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for error in form.non_field_errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <form class="form-horizontal" method="post" action="#">
-                        {% csrf_token %}
-                        {% for field in form %}
-                        <div class="form-group">
-                            {{ field.label_tag }}{% if field.field.required %}<span class="required">*</span>{% endif %}
-                            {{ field }}
-                            
 
-                        </div>
-                        {% endfor %}
-                        <div class="form-group ">
-                            <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                        </div>
-                    </form>
+					<div class="alert alert-danger">
+						<label>Complete los campos correctamente</label>
+					</div>
+                    {% endif %}
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="#">
+                        {% csrf_token %}
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label>Nombre</label>
+									{{ form.first_name}}
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Apellido</label>
+									{{ form.last_name}}
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label>Nombre de usuario</label>
+									{{ form.username}}
+								</div>
+								<div class="col-sm-4 form-group">
+									<label>Contraseña</label>
+									{{ form.password}}
+								</div>
+								<div class="col-sm-4 form-group">
+									<label>Confirmar contraseña</label>
+									{{ form.confirm_password}}
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label>Email</label>
+									{{ form.email}}
+								</div>
+								<div class="col-sm-4 form-group">
+									<label>Fecha de Nacimiento</label>
+									<div class="input-group">
+    								{{ form.fecha_nacimiento }}
+    								<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+    								</div>
+								</div>
+							</div>
+							<div class=form-group">
+								<label>Descripcion</label>
+								{{ form.descripcion}}
+							</div>
+
+							<br>
+
+							<div class><label>Preferencias de dieta / Condiciones de salud: </label></div>
+
+							<div class= "row">
+								<div class="col" style="max-width: max-content;">
+									<div class="custom-control custom-checkbox">
+										<label>Vegetariana</label>
+										{{ form.vegetariano }}
+									</div>
+								</div>
+								<div class="col" style="max-width: max-content;">
+									<div class="custom-control custom-checkbox">
+										<label>Vegana</label>
+										{{ form.vegano }}
+									</div>
+								</div>
+								<div class="col" style="max-width: max-content;">
+									<div class="custom-control custom-checkbox">
+										<label>Diabética</label>
+										{{ form.diabetico }}
+									</div>
+								</div>
+								<div class="col" style="max-width: max-content;">
+									<div class="custom-control custom-checkbox">
+										<label>Celiaca</label>
+										{{ form.celiaco }}
+									</div>
+								</div>
+								<div class="col" style="max-width: max-content;">
+									<div class="custom-control custom-checkbox">
+										<label>Intolerancia a la lactosa</label>
+										{{ form.intolerancia_lactosa }}
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label for="Experiencia">Experiencia en la cocina: </label>
+									{{ form.experiencia}}
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Imagen de perfil</label>
+									{{ form.avatar }}
+								</div>
+							</div>
+							<br>
+
+							<div class="form-group ">
+                            <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Registrar</button>
+                        	</div>
+					</div>
+
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 {% endblock %}

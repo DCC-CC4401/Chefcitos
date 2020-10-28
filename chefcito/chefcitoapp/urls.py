@@ -13,4 +13,5 @@ urlpatterns = [
     path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('agregar_receta/', views.agregar_receta, name='agregar_receta'), 
     path('recetas/', views.recetas, name='recetas'),
+    path('default/', views.vista_receta, name='cualquier_nombre')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
