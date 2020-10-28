@@ -32,7 +32,11 @@
             <ul class="list-group">
                 {% for receta in recetas %} <!-- django template lang - for loop -->
                     <li class="list-group-item">
-                        <div>{{receta.receta_nombre}}</div>
+                        <div>{{receta.receta_nombre}}
+                            <br>
+                            <img src="{{ receta.receta_foto.url }}" style="object-fit: cover; width: 200px; height: 150px;">
+                        </div>
+
                         <span><!-- falta agregar imagen--></span>
                     </li>
                 {% endfor %}
