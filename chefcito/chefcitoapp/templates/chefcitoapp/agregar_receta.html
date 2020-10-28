@@ -8,12 +8,11 @@
                 <div  class="col-8">
                 <!-- Encabezado de la página-->
                    <h1>Agregar receta</h1>
-                   <hr>
                <!-- Fin encabezado -->
                 </div>
-                <div class="col">
+                <div class="col form-group">
                     {% if  user.is_authenticated %}
-                        <h2>Usuaria: {{ user.username }}</h2>
+                        <h2 >Usuari@: {{ user.username }}</h2>
                     {% endif %}
 
                 </div>
@@ -22,66 +21,48 @@
                {% if user.is_authenticated %}
                     <form action="" method="post">
                         {% csrf_token %} <!-- csrf token for basic security -->
-                        <div class="card" id="nueva-receta">
-                            <div class="card-header">
-                                    Nueva Receta
-                            </div>
+                        <div class="card col-sm-12" id="nueva-receta">
                             <div class="card-body">
-                                    <div class="form-group">
-                                    <label for="receta_nombre">Nombre de la receta </label>
-                                    <input type="text" id="receta_nombre" class="form-control" placeholder="¿Qué receta agregarás?" name="receta_nombre" required="required">
+                                <div class="row">
+                                    <div class="form-group col-sm-6 ">
+                                        <label for="receta_nombre">Nombre de la receta </label>
+                                        {{ form.receta_nombre }}
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="duracion">Tiempo</label>
+                                        {{ form.duracion}}
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="preparacion">Preparación</label>
-                                    <textarea  id="preparacion" class="form-control" placeholder="Describa la preparación de la receta" name="preparacion" required="required" rows="6"></textarea>
+                                    {{ form.preparacion }}
                                 </div>
-                                <div class="form-group">
-                                        <label for="duracion">Tiempo</label>
-                                        <input type="number"  id="duracion" class="form-control" placeholder="Tiempo de preparación en minutos" name="duracion" required="required"></input>
-                                </div>
+
                                 <div class="form-group">
                                         <label for="descripcion">Descripción</label>
-                                        <textarea  id="descripcion" class="form-control" placeholder="Agrega un comentario sobre la receta" name="descripcion" rows="4"></textarea>
+                                        {{ form.descripcion }}
                                 </div>
-                                <div class="form-group">
-                                        <label for="ingrediente1">Ingredientes</label>
-                                        <select id="ingrediente1"  class="form-control" name="ingredientes[]">
-                                            <option class="disabled" value="">Elige un ingrediente</option>
-                                            {% for ingrediente in ingredientes %}
-                                                <option class="" value="{{ ingrediente.ingrediente_nombre }}" name="{{ ingrediente.nombre }}">{{ ingrediente.nombre }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <select id="ingrediente2"  class="form-control" name="ingredientes[]">
-                                            <option class="disabled" value="">Elige un ingrediente</option>
-                                            {% for ingrediente in ingredientes %}
-                                                <option class="" value="{{ ingrediente.ingrediente_nombre }}" name="{{ ingrediente.nombre }}">{{ ingrediente.nombre }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <select id="ingrediente3"  class="form-control" name="ingredientes[]">
-                                            <option class="disabled" value="">Elige un ingrediente</option>
-                                            {% for ingrediente in ingredientes %}
-                                                <option class="" value="{{ ingrediente.ingrediente_nombre }}" name="{{ ingrediente.nombre }}">{{ ingrediente.nombre }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <div id="ingrediente4"></div>
+                                <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="ingrediente1">Ingredientes</label>
+                                        {{ form.ingrediente }}
                                 </div>
-                                <div> 
+                                <div class="form-group col-sm-6">
                                     <!--crear js para esto-->
+                                    <p>Si tu ingrediente no existe, agregalo</p>
                                     <button type="button" onclick="otroIngre()"> Más ingredientes</button>
                                 </div>
-                                <div class="form-group">
-                                    <p>Si tu ingrediente no existe, agregalo</p>
-                                    <!--como hago esto??-->
-                                </div>
 
-                                <div class="form-group">
+                                    <div class="form-group col-sm-3">
                                     <label for="receta-foto">Imagen de la receta</label>
-                                    <input type="file"  id="receta_foto" class="form-control" placeholder="Agrega una imagen" name="receta_foto" accept="image/*"></input>
+                                    {{ receta.fotos}}
+                                </div>
                                 </div>
 
-                                <div id="botones">
-                                    <button class="btn btn-primary" name="recetaAdd" type="submit"><i class="fa fa-plus icon"></i>Guardar receta</button>
-                                </div>
+                                <div class="form-group ">
+                            	<button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Subir receta</button>
+                        	    </div>
                                     
                                 </div>
                         </div>

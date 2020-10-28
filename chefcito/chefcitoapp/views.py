@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password
 from .models import User, Ingrediente, Receta, CalificaReceta
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.password_validation import validate_password
-from .forms import UserForm
+from .forms import UserForm, RecetaForm
 from datetime import *
 import os
 
@@ -114,8 +114,6 @@ def register_user(request):
 
     if request.method=='POST':
         form = UserForm(request.POST or None)
-
-
         if form.is_valid():
             user = form.save()
             return HttpResponseRedirect('/')
@@ -124,26 +122,20 @@ def register_user(request):
 
 
 def agregar_receta(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            form = RecetaForm()
+            return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
 
-    ingredientes = Ingrediente.objects.all() 
-     
-    if request.method == "GET":
-        return render(request, "chefcitoapp/agregar_receta.html", {"ingredientes": ingredientes})
- 
-    elif request.method == 'POST': #Si estamos recibiendo el form de registro
-        if "recetaAdd" in request.POST: 
-            if request.user.is_authenticated:
-                receta_nombre = request.POST['receta_nombre']
-                preparacion = request.POST['preparacion']
-                duracion = request.POST['duracion']
-                receta_foto = request.POST['receta_foto']
-                descripcion = request.POST['descripcion']
-                ingredientes_receta = request.POST['ingredientes[]']
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            form = RecetaForm(request.POST or None)
 
-                receta = Receta(receta_nombre=receta_nombre, preparacion=preparacion, duracion=duracion, receta_foto=receta_foto, descripcion=descripcion, ingrediente=ingredientes_receta, nombre_usuario=request.user)
-                receta.save() 
+            if form.is_valid():
+                form.save(user=request.user, commit=False)
+                return HttpResponseRedirect('/')
 
-            return HttpResponseRedirect('/agregar_receta')
+            return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
 
 
 def recetas(request):

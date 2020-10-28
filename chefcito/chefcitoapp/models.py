@@ -34,7 +34,7 @@ class Ingrediente(models.Model):
     int_lactosa=models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.ingrediente_id)
+        return str(self.ingrediente_nombre)
 
 
 
@@ -43,9 +43,9 @@ class Receta(models.Model):
     receta_nombre= models.CharField(primary_key=True, max_length=250)
 
     preparacion=models.TextField(max_length=1300)
-    duracion = models.TimeField()
-    receta_foto=models.ImageField(upload_to='fotos_recetas/')
-    fecha_publ=models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
+    duracion = models.BigIntegerField()
+    receta_foto=models.ImageField(default=False, upload_to='fotos_recetas/', blank=True, null=True)
+    fecha_publ=models.DateTimeField(auto_now_add=True)
     descripcion=models.TextField()
     ingrediente=models.ManyToManyField(Ingrediente)
 

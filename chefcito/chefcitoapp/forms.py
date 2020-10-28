@@ -10,7 +10,6 @@ class DateInputtrue(forms.DateInput):
 class UserForm(forms.ModelForm):
     class Meta:
         model= User
-
         fields = ['first_name', 'last_name', 'fecha_nacimiento','username', 'password', 'email', 'descripcion', 'experiencia','vegano', 'vegetariano', 'celiaco', 'diabetico', 'intolerancia_lactosa', 'avatar']
 
         def __init__(self, *args, **kwargs):
@@ -56,4 +55,39 @@ class UserForm(forms.ModelForm):
     celiaco = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
     intolerancia_lactosa = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
     avatar=forms.FileField(required=False)
+
+
+
+class RecetaForm(forms.ModelForm):
+    class Meta:
+        model= Receta
+        fields = ['receta_nombre', 'preparacion','duracion', 'ingrediente', 'descripcion','receta_foto']
+
+    def __init__(self, *args, **kwargs):
+        super(RecetaForm, self).__init__(*args, **kwargs)
+
+
+    def save(self, **kwargs):
+        user = kwargs.pop('user')
+        instance = super(RecetaForm, self).save(**kwargs)
+        instance.nombre_usuario = user
+        instance.save()
+        return instance
+
+
+
+    receta_nombre = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ingrese nombre de la receta..'}))
+    duracion = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese duración..'}))
+
+    preparacion = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows':"3",'cols':'70' , 'placeholder':'Ingrese los pasos de preparación..'}))
+
+    ingrediente = forms.ModelMultipleChoiceField(
+        queryset=Ingrediente.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-control'})
+        #widget = forms.SelectMultiple(attrs={'class': 'form-control'})
+    )
+
+    descripcion = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows':"3",'cols':'70' , 'placeholder':'Ingrese una descripcion breve..'}))
+    #receta_fotos = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
 
