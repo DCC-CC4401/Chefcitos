@@ -10,6 +10,8 @@ from .forms import UserForm
 from datetime import *
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+AVATAR_ROOT = os.path.join(BASE_DIR, 'media')
 def inicio(request):
     if request.method == "GET":
         return render(request, "chefcitoapp/index.html")
@@ -64,15 +66,16 @@ def editar_perfil(request):
             return render(request, 'chefcitoapp/editar_perfil.html', {'form': the_profile})
 
         if request.method == 'POST':
-            # form = UserForm(request.POST or None)
-            # if form.is_valid():
-            the_profile = request.user
-            if 'fotoperfil-edit' in request.POST:  # Edit Picture
 
+            #form = UserForm(request.POST or None)
+            #if form.is_valid():
+            the_profile = request.user
+            if 'fotoperfil-edit' in request.POST: #Edit Picture
+            
                 if request.FILES['adjunto']:
                     old = the_profile.avatar
                     the_profile.avatar = request.FILES['adjunto']
-                    the_profile.avatar.name = the_profile.username + "##" + str(datetime.now()) + ".png"
+                    the_profile.avatar.name = the_profile.username + "##" + str(datetime.now()) +".png"
                     print(the_profile.avatar.url)
                     if str(old) != '':
                         try:
@@ -90,15 +93,18 @@ def editar_perfil(request):
                 the_profile.experiencia = request.POST["Experiencia"]
                 the_profile.descripcion = request.POST["Descripcion"]
 
+
                 the_profile.vegetariano = bool(request.POST.get('Vegetariano', False))
                 the_profile.vegano = bool(request.POST.get('Vegano', False))
                 the_profile.diabetico = bool(request.POST.get('Diabetico', False))
                 the_profile.celiaco = bool(request.POST.get('Celiaco', False))
                 the_profile.intolerancia_lactosa = bool(request.POST.get('int_lactosa', False))
-
+                
             the_profile.save()
             messages.success(request, 'Perfil actualizado! c:')
-            return HttpResponseRedirect('/perfil')  # al guardar redirige al perfil(???)
+            return HttpResponseRedirect('/perfil') # al guardar redirige al perfil(???) 
+
+
 
 def register_user(request):
     if request.method == 'GET':

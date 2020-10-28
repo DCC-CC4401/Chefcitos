@@ -3,6 +3,7 @@
 {% block title %} Registrar usuario {% endblock %}
 
 {%block content %}
+
 <div class="container" style="margin-top:2em">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,6 +11,7 @@
             <div class="card-header h3">Registrarse</div>
                 <div class="card-body">
                     {% if form.errors %}
+
 					<div class="alert alert-danger">
 						<label>Complete los campos correctamente</label>
 					</div>
@@ -114,6 +116,7 @@
                             <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">Registrar</button>
                         	</div>
 					</div>
+
                 </div>
             </div>
         </div>

@@ -3,19 +3,19 @@ from .models import User, Ingrediente, CalificaReceta, Receta
 from django.db import models
 from django.utils import timezone
 
-class DateInputtrue(forms.DateInput):
-    input_type = 'date'
 
+class DateInputtrue(forms.DateInput):
+    input_type = 'date
 
 class UserForm(forms.ModelForm):
     class Meta:
         model= User
+
         fields = ['first_name', 'last_name', 'fecha_nacimiento','username', 'password', 'email', 'descripcion', 'experiencia','vegano', 'vegetariano', 'celiaco', 'diabetico', 'intolerancia_lactosa', 'avatar']
 
         def __init__(self, *args, **kwargs):
             super(UserForm, self).__init__(*args, **kwargs)
             self.fields['first_name', 'last_name', 'fecha_nacimiento', 'descripcion', 'experiencia', 'vegano', 'celiaco', 'diabetico', 'intolerancia_lactosa', 'avatar'].required = False
-
 
     def save(self, commit=True):
         # Save the provided password in hashed format
@@ -24,7 +24,6 @@ class UserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
 
     def clean(self):
         cleaned_data = super(UserForm, self).clean()
