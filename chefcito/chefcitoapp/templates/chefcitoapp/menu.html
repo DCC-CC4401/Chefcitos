@@ -23,27 +23,48 @@
     {% load static %}
 
     <style>
-        #estrellitas {width: 250px;margin: 0 auto; padding: 10px; border: 1px solid#d9d9d9; margin-left: 0;}
+        #estrellitas {width: 250px;margin: 0 auto; padding: 10px; border: 1px solid#d9d9d9; margin-left: 0; border-radius: 5px;}
       
         #estrellitas {text-align: center;}
-        #estrellitas label {font-size: 20px;}
+        #estrellitas label {font-size: 15px;}
         input[type="radio"] {display: none;}
-        label {color: grey;}
+        label {
+            color: grey;
+            margin-bottom: 0;
+        }
         .clasificacion {
           direction: rtl;
           unicode-bidi: bidi-override;
+          margin-bottom: 0;
         }
         label:hover,
         label:hover ~ label {color: orange;}
         input[type="radio"]:checked ~ label {color: orange;}
 
-        .block1{
-            width: 40%
+        .grid-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
         }
-        .block2{
-          display: inline-block;
+
+        #tiempo{
+            margin-bottom: 10px;
         }
-    </style>      
+
+        #imagenrec{
+            display: block;
+            padding: 0;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 50px;
+        }
+        #btncoment{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style> 
+    
+         
 
 <body>
     <nav class="navbar navbar-dark" style="background-color:#ff0080;">
