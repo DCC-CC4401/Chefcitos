@@ -1,0 +1,88 @@
+
+    {% extends 'chefcitoapp/menu.html' %}
+    {% block title %} Receta {% endblock %}
+    {% block content %}
+    <div class="container" style="margin-top: 2em">
+      <div id="encabezado" class="row">
+        <div  class="col-8">
+        <!-- Encabezado de la página-->
+           <h1>Nombre Receta: <!--añadir nombre receta --></h1>
+           <hr>
+        </div>     
+      </div>
+      <div id="tiempo">Tiempo de preparación:<!--añadir tiempo de preparacion--></div>
+      <div class="grid-container">
+        <div class="grid-child">
+          <div class="card">
+            <div class="card-header">Ingredientes</div>
+            <ul>
+              <li>ingrediente1</li>
+              <li>ingrediente2</li>
+              <!--agregar ingredientes-->
+            </ul>
+          </div>  
+        </div>
+    
+        <div class="grid-child">
+          <div class="card">
+            <div class="card-header">Preparación</div>
+              <ol>
+                <li>paso1</li>
+                <li>paso2</li>
+                <!--agregar pasos-->
+              </ol>   
+          </div> 
+        </div> 
+        
+      </div>  
+      <div id="imagenrec" style="width: 18rem;">
+          <img src="https://t2.rg.ltmcdn.com/es/images/9/5/6/img_fideos_con_salsa_de_tomate_41659_600.jpg" class="card-img-top" alt="..."><!-- agregar imagen-->
+        </div>
+      
+      
+      <form action method="post" id='estrellitas' style="scale: 0.8;">
+          <div>Calificar</div>
+          <p class="clasificacion">
+            <input id="radio1" type="radio" name="estrellas" value="5"><!--
+          --><label for="radio1">★</label><!--
+          --><input id="radio2" type="radio" name="estrellas" value="4"><!--
+          --><label for="radio2">★</label><!--
+          --><input id="radio3" type="radio" name="estrellas" value="3"><!--
+          --><label for="radio3">★</label><!--
+          --><input id="radio4" type="radio" name="estrellas" value="2"><!--
+          --><label for="radio4">★</label><!--
+          --><input id="radio5" type="radio" name="estrellas" value="1"><!--
+          --><label for="radio5">★</label>
+        </p>
+      </form>
+      <div>
+        <div >
+          <h3>Dejanos tu comentario</h3>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="widget-area no-padding blank">
+              <div class="status-upload">
+                <form>
+                  <textarea class="form-control" placeholder="¿Que te parecio la receta?" ></textarea>
+                  <div id="btncoment">
+                    <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+                  </div>
+                </form>
+              </div><!-- Status Upload  -->
+            </div><!-- Widget Area -->
+          </div>
+        </div>     
+      </div>
+
+      <div id="fb-root"></div>
+      <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
+
+      <!-- Your embedded comments code -->
+      <div class="fb-comment-embed"
+        data-href="https://www.facebook.com/teletrece/posts/3748188338596036?comment_id=3748921155189421&__cft__[0]=AZUjcOCkUzg4YrlKuYfMWkNyjkPETftUoZzU4KHQx1AjtLlfry9lDmTa0PLHmJCGDC-FhkQQqDrvqKVVFdcmSg_3Nk_-ECXF-3YwqtBAqB2EcmhWYSZavRD593PcCed3LhS-CFhVwBEeDwDAdb3OMgHU--uq6lljKrQLfvLCzhARwzHiO2sq3SKK3Lww0W2Nd4Q&__tn__=R]-R"
+        data-width="500">
+      </div>
+    </div>
+    
+  {% endblock %}

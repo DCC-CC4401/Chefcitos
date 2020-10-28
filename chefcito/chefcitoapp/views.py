@@ -155,3 +155,5 @@ def recetas(request):
     if request.method == "GET":
         return render(request, "chefcitoapp/recetas.html", {"recetas": recetas})
     
+def vista_receta(request):
+    return render(request, 'chefcitoapp/vista_receta.html')
