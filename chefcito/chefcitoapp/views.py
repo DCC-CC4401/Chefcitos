@@ -31,7 +31,7 @@ def login_user(request):
             return HttpResponseRedirect('/')
         else:
             messages.error(request, 'Error al iniciar sesión')
-            return HttpResponseRedirect('/register')
+            return HttpResponseRedirect(request.path)
 
 
 
