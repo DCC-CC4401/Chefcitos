@@ -129,13 +129,27 @@ def agregar_receta(request):
 
     if request.method == 'POST':
         if request.user.is_authenticated:
-            form = RecetaForm(request.POST or None)
 
-            if form.is_valid():
-                form.save(user=request.user, commit=False)
-                return HttpResponseRedirect('/')
+            if 'ingre' in request.POST: 
+                print("OLA")
+                nombre = request.POST["ingrediente_nombre"]
+                vegetariano = bool(request.POST.get('Vegetariano', False))
+                vegano = bool(request.POST.get('Vegano', False))
+                diabetico = bool(request.POST.get('Diabetico', False))
+                celiaco = bool(request.POST.get('Celiaco', False))
+                intolerancia_lactosa = bool(request.POST.get('int_lactosa', False))
+                nuevo_ingre = Ingrediente(ingrediente_nombre=nombre, vegano=vegano, vegetariano=vegetariano, diabetico=diabetico, celiaco=celiaco, int_lactosa= intolerancia_lactosa)
+                nuevo_ingre.save()
 
-            return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
+            else:
+                print("CHAO")
+                form = RecetaForm(request.POST or None)
+
+                if form.is_valid():
+                    form.save(user=request.user, commit=False)
+                    return HttpResponseRedirect('/')
+
+                return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
 
 
 def recetas(request):

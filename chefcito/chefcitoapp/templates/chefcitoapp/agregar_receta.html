@@ -51,7 +51,87 @@
                                 <div class="form-group col-sm-6">
                                     <!--crear js para esto-->
                                     <p>Si tu ingrediente no existe, agregalo</p>
-                                    <button type="button" onclick="otroIngre()"> Más ingredientes</button>
+                                    <button type="button" data-target="#ingrediente" class="btn btn-primary" data-toggle="modal" > Más ingredientes</button>
+                                    <div class="modal fade" id="ingrediente" tabindex="-1" role="dialog" aria-labelledby="ingredienteLabel" aria-hidden="true" data-backdrop="static">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="ingredienteLabel">Agregar ingrediente</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"></span>
+                                              </button>
+                                            </div>
+                                            <form id="form" method="post" novalidate>
+                                                {% csrf_token %}
+                                            <div class="modal-body">
+                                                
+                                                    <div class="form-group row">
+                                                        <div class="col">
+                                                            <label for="ingrediente_nombre">Nombre: </label>
+                                                            <input type="text" class="form-control" id="ingrediente_nombre" name="ingrediente_nombre"
+                                                                required>
+                                                            <span id="ingrediente_nombreError">Debes ingresar un nombre válido</span>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col">
+                                                            <label>Preferencias de dieta:</label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <!-- Fila -->
+                                                        
+                                                        <div class="col" style="max-width: max-content;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="Vegetariano" name="Vegetariano">
+                                                                <label class="custom-control-label" for="Vegetariano">Vegetariana</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col" style="max-width: max-content;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="Vegano" name="Vegano">
+                                                            
+                                                                <label class="custom-control-label" for="Vegano">Vegana</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col" style="max-width: max-content;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="Diabetico" name="Diabetico">
+                                                                
+                                                                <label class="custom-control-label" for="Diabetico">Diabética</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col" style="max-width: max-content;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="Celiaca" name="Celiaco">
+                                                                
+                                                                <label class="custom-control-label" for="Celiaca">Celíaca</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col" style="max-width: max-content;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="int_lactosa" name="int_lactosa">
+                                                                
+                                                                <label class="custom-control-label" for="int_lactosa">Sin Lactosa</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" name="ingre" class="btn btn-primary">Agregar ingrediente</button>
+                                            
+                                            </div>
+                                            </form>    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                     <div class="form-group col-sm-3">
