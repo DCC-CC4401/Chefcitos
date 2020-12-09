@@ -152,12 +152,11 @@ def agregar_receta(request):
                 return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
 
 
-def recetas(request):
-    recetas = Receta.objects.all() 
+def todas_recetas(request):
+    recetas = Receta.objects.all()
 
-    if request.method == "GET":
+    return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas})
 
-        return render(request, "chefcitoapp/recetas.html", {"recetas": recetas})
     
 def vista_receta(request, receta_id):
     try:
@@ -169,3 +168,4 @@ def vista_receta(request, receta_id):
         return render(request, 'chefcitoapp/vista_receta_alt.html', {"receta": receta})
     else:
         return render(request, 'chefcitoapp/receta_no_valida.html')
+

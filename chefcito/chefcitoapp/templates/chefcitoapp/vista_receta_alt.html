@@ -9,32 +9,17 @@
         <div class="col-md-12">
         <div class="card">
 			<div class="card-body">
-				{% if form.errors %}
-					{% for field in form %}
-						{% for error in field.errors %}
-							<div class="alert alert-danger">
-								{{ error|escape }}
-							</div>
-						{% endfor %}
-					{% endfor %}
-					{% for error in form.non_field_errors %}
-						<div class="alert alert-danger">
-							{{ error|escape }}
-						</div>
-					{% endfor %}
-				{% endif %}
-
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="imagen-receta"><img src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
 					</div>
 
 					<div class="col-sm-6">
-						<div class="row titulo-receta">
-							<strong>{{receta.receta_nombre}}</strong>
-						</div>
-
 						<div class="row">
+							<div class="col-sm-12 titulo-receta">
+								<strong>{{receta.receta_nombre}}</strong>
+							</div>
+
 							<div class="col-sm-3">
 								<img class="iconos-receta" src="../../static/chefcitoapp/img/preparacion_icono.png"><div><strong>{{ receta.duracion}} mins</strong></div>
 							</div>
@@ -47,10 +32,9 @@
 								<label><strong>Creado por:</strong>
 								{{ receta.nombre_usuario}}</label>
 							</div>
-						</div>
 
-						<div class="row" style="margin: 10px">
-							<div class="card">
+							<div class="col-sm-12">
+							<div class="card ingr-prep-card">
 								<div class="card-header"><strong>Ingredientes:</strong></div>
 								<div class="card-body">
 									<ul>
@@ -60,17 +44,17 @@
 									</ul>
 								</div>
 							</div>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row" style="margin-top: 10px">
-					<div class="grid-child">
-					  <div class="card">
-						<div class="card-header"><strong>Preparación</strong></div>
-						  {{receta.preparacion}}
-					  </div>
-					</div>
+					<div class="col-sm-12">
+						<div class="grid-child">
+							<div class="card ingr-prep-card">
+								<div class="card-header"><strong>Preparación</strong></div>
+								{{receta.preparacion}}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -12,3 +12,31 @@
 .iconos-receta{
     width: 40px
 }
+
+#todas-recetas-header{
+    text-align: center;
+}
+
+.recetas-indiv{
+    margin: 10px;
+    position: relative;
+}
+
+
+.ingr-prep-card{
+    margin: 10px;
+    padding: 10px;
+}
+
+.titulo-mostrar-todas-recetas{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom:5px;
+}
+
+.img-mostrar-todas-recetas{
+    width: 200px;
+    border-radius: 25px;
+    border: 2px solid darkgray;
+}
