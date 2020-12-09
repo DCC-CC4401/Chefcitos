@@ -11,8 +11,9 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="imagen-receta"><img src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+						<div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
 					</div>
+
 
 					<div class="col-sm-6">
 						<div class="row">
@@ -20,20 +21,11 @@
 								<strong>{{receta.receta_nombre}}</strong>
 							</div>
 
-							<div class="col-sm-3">
-								<img class="iconos-receta" src="../../static/chefcitoapp/img/preparacion_icono.png"><div><strong>{{ receta.duracion}} mins</strong></div>
+							<div class="col-sm-12 descr">
+								{{receta.descripcion}}
 							</div>
 
 							<div class="col-sm-6">
-								<label> <strong>Fecha de Preparación:</strong><div>{{ receta.fecha_publ |date:"M d, Y" }}</div></label>
-							</div>
-
-							<div class="col-sm-3">
-								<label><strong>Creado por:</strong>
-								{{ receta.nombre_usuario}}</label>
-							</div>
-
-							<div class="col-sm-12">
 							<div class="card ingr-prep-card">
 								<div class="card-header"><strong>Ingredientes:</strong></div>
 								<div class="card-body">
@@ -45,6 +37,15 @@
 								</div>
 							</div>
 							</div>
+
+
+							<div class="col-sm-6">
+								<div class="extra-inf"><img class="iconos-receta" src="../../static/chefcitoapp/img/preparacion_icono.png"> <strong>{{ receta.duracion}} mins</strong></div>
+								<div class="extra-inf"><label> <strong>Fecha de Preparación:</strong><div>{{ receta.fecha_publ |date:"M d, Y" }}</div></label></div>
+								<div class="extra-inf"><label><strong>Creado por:</strong><br>
+								{{ receta.nombre_usuario}}</label><br></div>
+							</div>
+
 						</div>
 					</div>
 

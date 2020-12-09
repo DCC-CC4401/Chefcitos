@@ -1,11 +1,18 @@
 .imagen-receta{
     width: 400px;
+    border-radius: 40px;
+    border: 4px solid darkgray;
 }
 
 .titulo-receta{
     text-transform: uppercase;
     font-size: 40px;
-    margin-bottom:40px;
+    margin: 10px;
+}
+
+
+.descr{
+    margin: 10px;
 }
 
 
@@ -22,6 +29,10 @@
     position: relative;
 }
 
+.extra-inf{
+    margin: 10px;
+}
+
 
 .ingr-prep-card{
     margin: 10px;
@@ -32,7 +43,7 @@
     text-transform: uppercase;
     font-weight: bold;
     font-size: 20px;
-    margin-bottom:5px;
+    margin-bottom:px;
 }
 
 .img-mostrar-todas-recetas{
