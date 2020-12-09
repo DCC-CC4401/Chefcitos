@@ -1,0 +1,14 @@
+.imagen-receta{
+    width: 400px;
+}
+
+.titulo-receta{
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-bottom:40px;
+}
+
+
+.iconos-receta{
+    width: 40px
+}

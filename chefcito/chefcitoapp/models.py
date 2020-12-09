@@ -40,7 +40,8 @@ class Ingrediente(models.Model):
 
 class Receta(models.Model):
     nombre_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    receta_nombre= models.CharField(primary_key=True, max_length=250)
+    receta_id = models.AutoField(primary_key=True)
+    receta_nombre= models.CharField(max_length=250)
 
     preparacion=models.TextField(max_length=1300)
     duracion = models.BigIntegerField()

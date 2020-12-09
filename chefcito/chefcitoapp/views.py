@@ -153,11 +153,19 @@ def agregar_receta(request):
 
 
 def recetas(request):
-
     recetas = Receta.objects.all() 
 
     if request.method == "GET":
+
         return render(request, "chefcitoapp/recetas.html", {"recetas": recetas})
     
-def vista_receta(request):
-    return render(request, 'chefcitoapp/vista_receta.html')
+def vista_receta(request, receta_id):
+    try:
+        receta=Receta.objects.get(receta_id=receta_id)
+    except Receta.DoesNotExist:
+        receta = None
+
+    if receta!=None:
+        return render(request, 'chefcitoapp/vista_receta_alt.html', {"receta": receta})
+    else:
+        return render(request, 'chefcitoapp/receta_no_valida.html')
