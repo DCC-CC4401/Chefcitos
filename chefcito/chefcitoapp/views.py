@@ -14,7 +14,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 AVATAR_ROOT = os.path.join(BASE_DIR, 'media')
 def inicio(request):
     if request.method == "GET":
-        return render(request, "chefcitoapp/index.html")
+        pass
+    return render(request, "chefcitoapp/index.html")
 
 
 
@@ -154,8 +155,24 @@ def agregar_receta(request):
 
 def todas_recetas(request):
     recetas = Receta.objects.all()
+    vegano = False
+    vegetariano = False
+    diabetico = False
+    celiaco = False
+    int_lactosa = False
 
-    return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas})
+    if request.method == 'POST':
+        if 'filtrar' in request.POST: #Edit Picture
+            vegetariano = bool(request.POST.get('Vegetariano', False))
+            vegano = bool(request.POST.get('Vegano', False))
+            diabetico = bool(request.POST.get('Diabetico', False))
+            celiaco = bool(request.POST.get('Celiaco', False))
+            int_lactosa = bool(request.POST.get('int_lactosa', False))
+            # recetas = Receta.objects.filter(vegano__gte=True, vegetariano__gte=True)
+            if vegetariano:
+                recetas = recetas.filter(vegetariano__gte = True)
+            
+    return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas, "vegano": vegano, "vegetariano": vegetariano, "diabetico": diabetico, "celiaco": celiaco, "int_lactosa": int_lactosa})
 
     
 def vista_receta(request, receta_id):
