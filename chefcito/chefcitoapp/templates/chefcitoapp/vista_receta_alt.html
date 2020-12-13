@@ -11,7 +11,11 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-sm-6">
-						<div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+						{% if receta.receta_foto %}
+							<div><img class="imagen-receta" src="{{ receta.receta_foto.url }}"></div>
+						{% else %}
+							<div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+						{% endif %}	
 					</div>
 
 
