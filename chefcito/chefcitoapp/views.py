@@ -171,6 +171,14 @@ def todas_recetas(request):
             # recetas = Receta.objects.filter(vegano__gte=True, vegetariano__gte=True)
             if vegetariano:
                 recetas = recetas.filter(vegetariano__gte = True)
+            if vegano:
+                recetas = recetas.filter(vegano__gte = True)
+            if diabetico:
+                recetas = recetas.filter(diabetico__gte = True)
+            if celiaco:
+                recetas = recetas.filter(celiaco__gte = True)
+            if int_lactosa:
+                recetas = recetas.filter(intolerancia_lactosa__gte = True)
             
     return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas, "vegano": vegano, "vegetariano": vegetariano, "diabetico": diabetico, "celiaco": celiaco, "int_lactosa": int_lactosa})
 
