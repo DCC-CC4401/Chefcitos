@@ -3,53 +3,174 @@
 {% block title %} Todas las recetas {% endblock %}
 
 {%block content %}
-
+<script src="orden.js"></script>
+<link href="orden.css" rel="stylesheet" type="text/css">
 <div class="container" style="margin-top:2em">
     <div class="row">
         <div class="col-lg-9">
-        <div class="card">
-            <div class="card-header display-4" id="todas-recetas-header">Todas las recetas</div>
-			<div class="card-body">
-                <div class="row">
-                    {% for rec in receta %}
-                        <div class="col-sm-6">
-                        <div class="card recetas-indiv">
-                            <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    {% if rec.receta_foto %}
-                                        <div><img class="imagen-receta" src="{{ rec.receta_foto.url }}"></div>
-                                    {% else %}
-                                        <div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
-                                    {% endif %}	    
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="row"></div>
-                                    <div class="col-sm-12">
-                                        <div class="titulo-mostrar-todas-recetas">{{rec}}</div><em>{{rec.nombre_usuario}}</em><br><em>{{rec.duracion}} min</em>
+            <div class="card">
+                <div class="card-header display-4" id="todas-recetas-header">Todas las recetas</div>
+                <div class="card-body" id="default">
+                    <div class="row">
+                        {% for rec in receta %}
+                            <div class="col-sm-6">
+                            <div class="card recetas-indiv">
+                                <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {% if rec.receta_foto %}
+                                            <div><img class="imagen-receta" src="{{ rec.receta_foto.url }}"></div>
+                                        {% else %}
+                                            <div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+                                        {% endif %}
                                     </div>
 
-                                    <div class="col-sm-12"><a href="../receta/{{rec.receta_id}}">Ver Receta</a></div>
+                                    <div class="col-sm-6">
+                                        <div class="row"></div>
+                                        <div class="col-sm-12">
+                                            <div class="titulo-mostrar-todas-recetas">{{rec}}</div><em>{{rec.nombre_usuario}}</em><br><em>{{rec.duracion}} min</em>
+                                        </div>
+
+                                        <div class="col-sm-12"><a href="../receta/{{rec.receta_id}}">Ver Receta</a></div>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             </div>
-                        </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-body" id="alphabet">
+                    <div class="row">
+                        {% for rec in receta %}
+                            <div class="col-sm-6">
+                            <div class="card recetas-indiv">
+                                <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {% if rec.receta_foto %}
+                                            <div><img class="imagen-receta" src="{{ rec.receta_foto.url }}"></div>
+                                        {% else %}
+                                            <div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row"></div>
+                                        <div class="col-sm-12">
+                                            <div class="titulo-mostrar-todas-recetas">{{rec}}</div><em>{{rec.nombre_usuario}}</em><br><em>{{rec.duracion}} min</em>
+                                        </div>
+
+                                        <div class="col-sm-12"><a href="../receta/{{rec.receta_id}}">Ver Receta</a></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-body" id="downalphabet">
+                    <div class="row">
+                        {% for rec in receta %}
+                            <div class="col-sm-6">
+                            <div class="card recetas-indiv">
+                                <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {% if rec.receta_foto %}
+                                            <div><img class="imagen-receta" src="{{ rec.receta_foto.url }}"></div>
+                                        {% else %}
+                                            <div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row"></div>
+                                        <div class="col-sm-12">
+                                            <div class="titulo-mostrar-todas-recetas">{{rec}}</div><em>{{rec.nombre_usuario}}</em><br><em>{{rec.duracion}} min</em>
+                                        </div>
+
+                                        <div class="col-sm-12"><a href="../receta/{{rec.receta_id}}">Ver Receta</a></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-body" id="date">
+                    <div class="row">
+                        {% for rec in receta %}
+                            <div class="col-sm-6">
+                            <div class="card recetas-indiv">
+                                <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {% if rec.receta_foto %}
+                                            <div><img class="imagen-receta" src="{{ rec.receta_foto.url }}"></div>
+                                        {% else %}
+                                            <div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row"></div>
+                                        <div class="col-sm-12">
+                                            <div class="titulo-mostrar-todas-recetas">{{rec}}</div><em>{{rec.nombre_usuario}}</em><br><em>{{rec.duracion}} min</em>
+                                        </div>
+
+                                        <div class="col-sm-12"><a href="../receta/{{rec.receta_id}}">Ver Receta</a></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-body" id="downdate">
+                    <div class="row">
+                        {% for rec in receta %}
+                            <div class="col-sm-6">
+                            <div class="card recetas-indiv">
+                                <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {% if rec.receta_foto %}
+                                            <div><img class="imagen-receta" src="{{ rec.receta_foto.url }}"></div>
+                                        {% else %}
+                                            <div><img class="imagen-receta" src="https://www.196flavors.com/wp-content/uploads/2018/12/cola-de-mono-2-FP.jpg"></div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row"></div>
+                                        <div class="col-sm-12">
+                                            <div class="titulo-mostrar-todas-recetas">{{rec}}</div><em>{{rec.nombre_usuario}}</em><br><em>{{rec.duracion}} min</em>
+                                        </div>
+
+                                        <div class="col-sm-12"><a href="../receta/{{rec.receta_id}}">Ver Receta</a></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
-                    Filtrar
+                    Filtros
                 </div>
                 <div class="card-body">
                     <form method="POST">
                         Filtro por dieta:
-                        <div class="form-group row">
+                        <div class="form-group col">
                             <!-- Fila -->
                             <div class="col" style="max-width: max-content;">
                                 <div class="custom-control custom-checkbox">

@@ -155,6 +155,7 @@ def agregar_receta(request):
 
 def todas_recetas(request):
     recetas = Receta.objects.all()
+    recetasall = Receta.objects
     vegano = False
     vegetariano = False
     diabetico = False
@@ -179,8 +180,12 @@ def todas_recetas(request):
                 recetas = recetas.filter(celiaco__gte = True)
             if int_lactosa:
                 recetas = recetas.filter(int_lactosa__gte = True)
-            
-    return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas, "vegano": vegano, "vegetariano": vegetariano, "diabetico": diabetico, "celiaco": celiaco, "int_lactosa": int_lactosa})
+
+    recetas1 = recetas.order_by("fecha_publ")
+    recetas2 = recetas.order_by("receta_nombre")
+    recetas3 = recetas.order_by("-fecha_publ")
+    recetas4 = recetas.order_by("-receta_nombre")
+    return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas, "vegano": vegano, "vegetariano": vegetariano, "diabetico": diabetico, "celiaco": celiaco, "int_lactosa": int_lactosa, "aphabetical": recetas2, "date": recetas1, "downdate": recetas3, "downalphabetical": recetas4})
 
     
 def vista_receta(request, receta_id):
