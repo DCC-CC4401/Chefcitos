@@ -3,8 +3,7 @@
 {% block title %} Todas las recetas {% endblock %}
 
 {%block content %}
-<script src="orden.js"></script>
-<link href="orden.css" rel="stylesheet" type="text/css">
+
 <div class="container" style="margin-top:2em">
     <div class="row">
         <div class="col-lg-9">
@@ -40,9 +39,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="card-body" id="alphabet">
+                <div class="card-body d-none" id="alphabet">
                     <div class="row">
-                        {% for rec in receta %}
+                        {% for rec in aphabetical %}
                             <div class="col-sm-6">
                             <div class="card recetas-indiv">
                                 <div class="card-body">
@@ -70,9 +69,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="card-body" id="downalphabet">
+                <div class="card-body d-none" id="downalphabet">
                     <div class="row">
-                        {% for rec in receta %}
+                        {% for rec in downalphabetical %}
                             <div class="col-sm-6">
                             <div class="card recetas-indiv">
                                 <div class="card-body">
@@ -100,9 +99,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="card-body" id="date">
+                <div class="card-body d-none" id="date">
                     <div class="row">
-                        {% for rec in receta %}
+                        {% for rec in date %}
                             <div class="col-sm-6">
                             <div class="card recetas-indiv">
                                 <div class="card-body">
@@ -130,9 +129,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="card-body" id="downdate">
+                <div class="card-body d-none" id="downdate">
                     <div class="row">
-                        {% for rec in receta %}
+                        {% for rec in downdate %}
                             <div class="col-sm-6">
                             <div class="card recetas-indiv">
                                 <div class="card-body">
