@@ -6,9 +6,80 @@
 
 <div class="container" style="margin-top:2em">
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
             <div class="card">
-                <div class="card-header display-4" id="todas-recetas-header">Todas las recetas</div>
+                <div class="card-header display-4" id="todas-recetas-header">Todas las recetas
+
+                <div class="btn-group" style="float: right; margin-top: 10px;" >
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ordenar por</button>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" onclick="date()">Fecha de carga</a>
+                    <a class="dropdown-item" onclick="ddate()">Fecha de carga reverso</a>
+                    <a class="dropdown-item" onclick="alphabetically()">Alfabeticamente</a>
+                    <a class="dropdown-item" onclick="dalphabetically()">Alfabeticamente reverso</a>
+                    </div>
+                </div>
+
+                <div class="dropdown keep-open" style="float: right;">
+                <div class="btn-group" style="float: right; margin-top: 10px;" >
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtrar por</button>
+                    <div class="dropdown-menu keep-open-on-click">
+                        <div class="card-body">
+                            <form method="POST">
+                                <div class="custom-control custom-checkbox">
+                                    {% if vegetariano %}
+                                    <input type="checkbox" class="custom-control-input" id="Vegetariano" name="Vegetariano"
+                                        checked>
+                                    {% else %}
+                                    <input type="checkbox" class="custom-control-input" id="Vegetariano" name="Vegetariano">
+                                    {% endif %}
+                                    <label class="custom-control-label" for="Vegetariano">Vegetariana</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    {% if vegano %}
+                                    <input type="checkbox" class="custom-control-input" id="Vegano" name="Vegano" checked>
+                                    {% else %}
+                                    <input type="checkbox" class="custom-control-input" id="Vegano" name="Vegano">
+                                    {% endif %}
+                                    <label class="custom-control-label" for="Vegano">Vegana</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    {% if diabetico %}
+                                    <input type="checkbox" class="custom-control-input" id="Diabetico" name="Diabetico"
+                                        checked>
+                                    {% else %}
+                                    <input type="checkbox" class="custom-control-input" id="Diabetico" name="Diabetico">
+                                    {% endif %}
+                                    <label class="custom-control-label" for="Diabetico">Diabética</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    {% if celiaco %}
+                                    <input type="checkbox" class="custom-control-input" id="Celiaca" name="Celiaco" checked>
+                                    {% else %}
+                                    <input type="checkbox" class="custom-control-input" id="Celiaca" name="Celiaco">
+                                    {% endif %}
+                                    <label class="custom-control-label" for="Celiaca">Celíaca</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    {% if int_lactosa %}
+                                    <input type="checkbox" class="custom-control-input" id="int_lactosa" name="int_lactosa"
+                                        checked>
+                                    {% else %}
+                                    <input type="checkbox" class="custom-control-input" id="int_lactosa" name="int_lactosa">
+                                    {% endif %}
+                                    <label class="custom-control-label" for="int_lactosa">Sin Lactosa</label>
+                                </div>
+                                <button type="submit" name="filtrar" style="width: 100%;" class="btn btn-primary center">Guardar
+                                    cambios</button>
+                                {% csrf_token %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+                </div>
                 <div class="card-body" id="default">
                     <div class="row">
                         {% for rec in receta %}
@@ -158,77 +229,6 @@
                             </div>
                         {% endfor %}
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    Filtros
-                </div>
-                <div class="card-body">
-                    <form method="POST">
-                        Filtro por dieta:
-                        <div class="form-group col">
-                            <!-- Fila -->
-                            <div class="col" style="max-width: max-content;">
-                                <div class="custom-control custom-checkbox">
-                                    {% if vegetariano %}
-                                    <input type="checkbox" class="custom-control-input" id="Vegetariano" name="Vegetariano"
-                                        checked>
-                                    {% else %}
-                                    <input type="checkbox" class="custom-control-input" id="Vegetariano" name="Vegetariano">
-                                    {% endif %}
-                                    <label class="custom-control-label" for="Vegetariano">Vegetariana</label>
-                                </div>
-                            </div>
-                            <div class="col" style="max-width: max-content;">
-                                <div class="custom-control custom-checkbox">
-                                    {% if vegano %}
-                                    <input type="checkbox" class="custom-control-input" id="Vegano" name="Vegano" checked>
-                                    {% else %}
-                                    <input type="checkbox" class="custom-control-input" id="Vegano" name="Vegano">
-                                    {% endif %}
-                                    <label class="custom-control-label" for="Vegano">Vegana</label>
-                                </div>
-                            </div>
-                            <div class="col" style="max-width: max-content;">
-                                <div class="custom-control custom-checkbox">
-                                    {% if diabetico %}
-                                    <input type="checkbox" class="custom-control-input" id="Diabetico" name="Diabetico"
-                                        checked>
-                                    {% else %}
-                                    <input type="checkbox" class="custom-control-input" id="Diabetico" name="Diabetico">
-                                    {% endif %}
-                                    <label class="custom-control-label" for="Diabetico">Diabética</label>
-                                </div>
-                            </div>
-                            <div class="col" style="max-width: max-content;">
-                                <div class="custom-control custom-checkbox">
-                                    {% if celiaco %}
-                                    <input type="checkbox" class="custom-control-input" id="Celiaca" name="Celiaco" checked>
-                                    {% else %}
-                                    <input type="checkbox" class="custom-control-input" id="Celiaca" name="Celiaco">
-                                    {% endif %}
-                                    <label class="custom-control-label" for="Celiaca">Celíaca</label>
-                                </div>
-                            </div>
-                            <div class="col" style="max-width: max-content;">
-                                <div class="custom-control custom-checkbox">
-                                    {% if int_lactosa %}
-                                    <input type="checkbox" class="custom-control-input" id="int_lactosa" name="int_lactosa"
-                                        checked>
-                                    {% else %}
-                                    <input type="checkbox" class="custom-control-input" id="int_lactosa" name="int_lactosa">
-                                    {% endif %}
-                                    <label class="custom-control-label" for="int_lactosa">Sin Lactosa</label>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" name="filtrar" style="width: 100%;" class="btn btn-primary center">Guardar
-                            cambios</button>
-                        {% csrf_token %}
-                    </form>
                 </div>
             </div>
         </div>

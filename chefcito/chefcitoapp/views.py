@@ -155,7 +155,10 @@ def agregar_receta(request):
 
 def todas_recetas(request):
     recetas = Receta.objects.all()
-    recetasall = Receta.objects
+    recetas1 = Receta.objects.order_by("fecha_publ")
+    recetas2 = Receta.objects.order_by("receta_nombre")
+    recetas3 = Receta.objects.order_by("-fecha_publ")
+    recetas4 = Receta.objects.order_by("-receta_nombre")
     vegano = False
     vegetariano = False
     diabetico = False
@@ -172,21 +175,36 @@ def todas_recetas(request):
             # recetas = Receta.objects.filter(vegano__gte=True, vegetariano__gte=True)
             if vegetariano:
                 recetas = recetas.filter(vegetariano__gte = True)
+                recetas1 = recetas1.filter(vegetariano__gte = True)
+                recetas2 = recetas2.filter(vegetariano__gte = True)
+                recetas3 = recetas3.filter(vegetariano__gte = True)
+                recetas4 = recetas4.filter(vegetariano__gte = True)
             if vegano:
                 recetas = recetas.filter(vegano__gte = True)
+                recetas1 = recetas1.filter(vegano__gte=True)
+                recetas2 = recetas2.filter(vegano__gte=True)
+                recetas3 = recetas3.filter(vegano__gte=True)
+                recetas4 = recetas4.filter(vegano__gte=True)
             if diabetico:
                 recetas = recetas.filter(diabetico__gte = True)
+                recetas1 = recetas1.filter(diabetico__gte=True)
+                recetas2 = recetas2.filter(diabetico__gte=True)
+                recetas3 = recetas3.filter(diabetico__gte=True)
+                recetas4 = recetas4.filter(diabetico__gte=True)
             if celiaco:
                 recetas = recetas.filter(celiaco__gte = True)
+                recetas1 = recetas1.filter(celiaco__gte=True)
+                recetas2 = recetas2.filter(celiaco__gte=True)
+                recetas3 = recetas3.filter(celiaco__gte=True)
+                recetas4 = recetas4.filter(celiaco__gte=True)
             if int_lactosa:
                 recetas = recetas.filter(int_lactosa__gte = True)
+                recetas1 = recetas1.filter(int_lactosa__gte=True)
+                recetas2 = recetas2.filter(int_lactosa__gte=True)
+                recetas3 = recetas3.filter(int_lactosa__gte=True)
+                recetas4 = recetas4.filter(int_lactosa__gte=True)
 
-    recetas1 = recetas.order_by("fecha_publ")
-    recetas2 = recetas.order_by("receta_nombre")
-    recetas3 = recetas.order_by("-fecha_publ")
-    recetas4 = recetas.order_by("-receta_nombre")
     return render(request, "chefcitoapp/todas_recetas.html", {"receta": recetas, "vegano": vegano, "vegetariano": vegetariano, "diabetico": diabetico, "celiaco": celiaco, "int_lactosa": int_lactosa, "aphabetical": recetas2, "date": recetas1, "downdate": recetas3, "downalphabetical": recetas4})
-
     
 def vista_receta(request, receta_id):
     try:

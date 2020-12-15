@@ -61,7 +61,7 @@ class UserForm(forms.ModelForm):
 class RecetaForm(forms.ModelForm):
     class Meta:
         model= Receta
-        fields = ['receta_nombre', 'preparacion','duracion', 'ingrediente', 'descripcion','receta_foto']
+        fields = ['receta_nombre', 'preparacion','duracion', 'ingrediente', 'descripcion','receta_foto', 'vegetariano', 'vegano', 'diabetico', 'celiaco', 'int_lactosa']
 
     def __init__(self, *args, **kwargs):
         super(RecetaForm, self).__init__(*args, **kwargs)
@@ -90,4 +90,11 @@ class RecetaForm(forms.ModelForm):
 
     descripcion = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows':"3",'cols':'70' , 'placeholder':'Ingrese una descripcion breve..'}))
     #receta_fotos = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+
+    vegetariano = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    vegano = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    diabetico = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    celiaco = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
+    int_lactosa = forms.BooleanField(required=False,
+                                              widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
 

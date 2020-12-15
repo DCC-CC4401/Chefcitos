@@ -43,11 +43,31 @@
 							</div>
 
 
+
 							<div class="col-sm-6">
 								<div class="extra-inf"><img class="iconos-receta" src="../../static/chefcitoapp/img/preparacion_icono.png"> <strong>{{ receta.duracion}} mins</strong></div>
 								<div class="extra-inf"><label> <strong>Fecha de Preparación:</strong><div>{{ receta.fecha_publ |date:"M d, Y" }}</div></label></div>
 								<div class="extra-inf"><label><strong>Creado por:</strong><br>
 								{{ receta.nombre_usuario}}</label><br></div>
+								<div class="extra-inf"><label><strong>Dieta:</strong><br>
+								{% if receta.vegetariano %}
+								Vegetariana<br>
+								{% endif %}
+								{% if receta.vegano %}
+								Vegana<br>
+								{% endif %}
+								{% if receta.celiaco %}
+								Celiaca<br>
+								{% endif %}
+								{% if receta.int_lactosa %}
+								Int. Lactosa<br>
+								{% endif %}
+								{% if receta.diabetico %}
+								Diabetica<br>
+								{% endif %}
+								</label><br>
+
+								</div>
 							</div>
 
 						</div>

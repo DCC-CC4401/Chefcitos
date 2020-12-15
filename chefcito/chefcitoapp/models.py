@@ -27,11 +27,11 @@ class User(AbstractUser):
 class Ingrediente(models.Model):
     ingrediente_id=models.AutoField(primary_key=True)
     ingrediente_nombre=models.CharField(max_length=100)
-    vegano=models.BooleanField(default=False)
-    vegetariano=models.BooleanField(default=False)
-    diabetico=models.BooleanField(default=False)
-    celiaco=models.BooleanField(default=False)
-    int_lactosa=models.BooleanField(default=False)
+    #vegano=models.BooleanField(default=False)
+    #vegetariano=models.BooleanField(default=False)
+    #diabetico=models.BooleanField(default=False)
+    #celiaco=models.BooleanField(default=False)
+    #int_lactosa=models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.ingrediente_nombre)
