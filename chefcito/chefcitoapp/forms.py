@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, Ingrediente, CalificaReceta, Receta
+from .models import User, Ingrediente, CalificaReceta, Receta, RecetaIngrediente
 from django.db import models
 from django.utils import timezone
 
@@ -61,7 +61,7 @@ class UserForm(forms.ModelForm):
 class RecetaForm(forms.ModelForm):
     class Meta:
         model= Receta
-        fields = ['receta_nombre', 'preparacion','duracion', 'ingrediente', 'descripcion','receta_foto', 'vegetariano', 'vegano', 'diabetico', 'celiaco', 'int_lactosa']
+        fields = ['receta_nombre', 'preparacion','duracion', 'descripcion','receta_foto', 'vegetariano', 'vegano', 'diabetico', 'celiaco', 'int_lactosa']
 
     def __init__(self, *args, **kwargs):
         super(RecetaForm, self).__init__(*args, **kwargs)
@@ -82,11 +82,11 @@ class RecetaForm(forms.ModelForm):
 
     preparacion = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows':"3",'cols':'70' , 'placeholder':'Ingrese los pasos de preparación..'}))
 
-    ingrediente = forms.ModelMultipleChoiceField(
-        queryset=Ingrediente.objects.all(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control'})
-        #widget = forms.SelectMultiple(attrs={'class': 'form-control'})
-    )
+    #ingrediente = forms.ModelMultipleChoiceField(
+    #    queryset=Ingrediente.objects.all(),
+    #    widget=forms.SelectMultiple(attrs={'class': 'form-control'})
+    #    #widget = forms.SelectMultiple(attrs={'class': 'form-control'})
+    #)
 
     descripcion = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows':"3",'cols':'70' , 'placeholder':'Ingrese una descripcion breve..'}))
     #receta_fotos = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
@@ -98,3 +98,33 @@ class RecetaForm(forms.ModelForm):
     int_lactosa = forms.BooleanField(required=False,
                                               widget=forms.CheckboxInput(attrs={'class': 'form-control'}))
 
+class RecetaIngredienteForm(forms.ModelForm):
+    class Meta:
+        model= RecetaIngrediente
+        fields = ['ingrediente_id','medida', 'unidad']
+
+    def __init__(self, *args, **kwargs):
+        super(RecetaIngredienteForm, self).__init__(*args, **kwargs)
+
+
+    #def save(self, **kwargs):
+        #receta = kwargs.pop('receta')
+        #instance = super(RecetaIngredienteForm, self).save(**kwargs)
+        #instance.receta_id = receta
+       # instance.save()
+       # return instance
+    ingrediente_id = forms.ModelMultipleChoiceField( #poner un Select??
+        queryset=Ingrediente.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-control'})
+    )
+    medida = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ingrese unidad de medida..'}))
+
+    unidad = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad..'}))
+
+class IngredienteForm(forms.ModelForm):
+    class Meta:
+        model= Ingrediente
+        fields = ['ingrediente_nombre']
+
+    ingrediente_nombre = forms.CharField( widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ingrese el nombre del ingrediente..'}))

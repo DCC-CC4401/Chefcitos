@@ -3,10 +3,10 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
-from .models import User, Ingrediente, Receta, CalificaReceta
+from .models import User, Ingrediente, Receta, CalificaReceta, RecetaIngrediente
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.password_validation import validate_password
-from .forms import UserForm, RecetaForm
+from .forms import UserForm, RecetaForm, RecetaIngredienteForm, IngredienteForm
 from datetime import *
 import os
 
@@ -124,9 +124,9 @@ def register_user(request):
 
 def agregar_receta(request):
     if request.method == 'GET':
-        if request.user.is_authenticated:
             form = RecetaForm()
-            return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
+            rec_ing_form= RecetaIngredienteForm()
+            return render(request, 'chefcitoapp/agregar_receta.html', {'form': form, 'rec_ing_form':rec_ing_form})
 
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -145,9 +145,12 @@ def agregar_receta(request):
             else:
                 print("CHAO")
                 form = RecetaForm(request.POST or None)
+                rec_ing_form= RecetaIngredienteForm(request.Post)
 
-                if form.is_valid():
-                    form.save(user=request.user, commit=False)
+                if form.is_valid() and rec_ing_form.is_valid():
+                    nueva_receta=form.save(user=request.user, commit=False)
+                    
+                    rec_ing_form.save(receta=nueva_receta.receta_id)
                     return HttpResponseRedirect('/')
 
                 return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
