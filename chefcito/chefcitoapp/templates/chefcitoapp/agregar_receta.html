@@ -19,7 +19,7 @@
             </div>
            <div id="segunda-parte" >
                {% if user.is_authenticated %}
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %} <!-- csrf token for basic security -->
                         <div class="card col-sm-12" id="nueva-receta">
                             <div class="card-body">
@@ -43,54 +43,40 @@
                                         <label for="descripcion">Descripción</label>
                                         {{ form.descripcion }}
                                 </div>
-                                <div class="row">
-                                <div class="form-group col-sm-3">
-                                    <label for="ingrediente1">Ingredientes</label>
-                                        {{ form.ingrediente }}
-                                </div>
-<!--                                <div class="form-group col-sm-6">-->
-<!--                                    &lt;!&ndash;crear js para esto&ndash;&gt;-->
-<!--                                    <p>Si tu ingrediente no existe, agregalo</p>-->
-<!--                                    <button type="button" data-target="#ingrediente" class="btn btn-primary" data-toggle="modal" > Más ingredientes</button>-->
-<!--                                    <div class="modal fade" id="ingrediente" tabindex="-1" role="dialog" aria-labelledby="ingredienteLabel" aria-hidden="true" data-backdrop="static">-->
-<!--                                        <div class="modal-dialog" role="document">-->
-<!--                                          <div class="modal-content">-->
-<!--                                            <div class="modal-header">-->
-<!--                                              <h5 class="modal-title" id="ingredienteLabel">Agregar ingrediente</h5>-->
-<!--                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                                <span aria-hidden="true"></span>-->
-<!--                                              </button>-->
-<!--                                            </div>-->
-<!--                                            <form id="form" method="post" novalidate>-->
-<!--                                                {% csrf_token %}-->
-<!--                                            <div class="modal-body">-->
-<!--                                                -->
-<!--                                                    <div class="form-group row">-->
-<!--                                                        <div class="col">-->
-<!--                                                            <label for="ingrediente_nombre">Nombre: </label>-->
-<!--                                                            <input type="text" class="form-control" id="ingrediente_nombre" name="ingrediente_nombre"-->
-<!--                                                                required>-->
-<!--                                                            <span id="ingrediente_nombreError">Debes ingresar un nombre válido</span>-->
-<!--                                                        </div>-->
-<!--                                                        -->
-<!--                                                    </div>-->
-<!--                                                -->
-<!--                                            </div>-->
-<!--                                            -->
-<!--                                            <div class="modal-footer">-->
-<!--                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>-->
-<!--                                                <button type="submit" name="ingre" class="btn btn-primary">Agregar ingrediente</button>-->
-<!--                                            -->
-<!--                                            </div>-->
-<!--                                            </form>    -->
-<!--                                                -->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
 
+
+                                {{ rec_ing_form.management_form }}
+
+                                <div id="anadir_ingrediente_form">
+                                    {% for receta in rec_ing_form %}
+                                    <div class="ingrediente_container">
+                                        <div class="row">
+                                            <div class="form-group col-sm-3">
+                                                <label for="ingrediente1">Ingredientes</label>
+                                                {{ receta.ingrediente_id }}
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="unidad">Cantidad</label>
+                                                {{ receta.unidad }}
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="medida">Unidad de medida</label>
+                                                {{ receta.medida }}
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    {% endfor %}
+                                    
                                 </div>
 
+                                <div class="form-group">
+                                    <button id="add_ingrediente" class="btn btn-primary" type="button" onclick="add_ingrediente_function()">Añadir Ingrediente</button>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <p>*Si no aparece tu ingrediente agregalo en el siguiente enlace y luego recarga la página.</p>
+                                    <a href="{% url 'agregar_ingrediente' %}" class="btn btn-outline-dark" target="_blank">Añadir un nuevo ingrediente</a>
+                                </div>
                                 <br>
                                 <div class="row">
 								<div class="form-group col-2" style="max-width: max-content;">
@@ -125,8 +111,8 @@
 								</div>
 
                                 <div class="form-group col-sm-3">
-                                    <label for="receta-foto">Imagen de la receta</label>
-                                    {{ receta.fotos}}
+                                    <label for="receta-foto">Imagen de la receta</label><br>
+                                    {{ form.receta_foto }}
                                 </div>
                                 </div>
 
