@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password
 from .models import User, Ingrediente, Receta, CalificaReceta, RecetaIngrediente
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.password_validation import validate_password
-from .forms import UserForm, RecetaForm, RecetaIngredienteForm, IngredienteForm
+from .forms import UserForm, RecetaForm, RecetaIngredienteForm, IngredienteForm, RecetaIngredienteFormSet
 from datetime import *
 import os
 
@@ -125,35 +125,26 @@ def register_user(request):
 def agregar_receta(request):
     if request.method == 'GET':
             form = RecetaForm()
-            rec_ing_form= RecetaIngredienteForm()
+
+            rec_ing_form = RecetaIngredienteFormSet()
+            #rec_ing_form= RecetaIngredienteForm()
             return render(request, 'chefcitoapp/agregar_receta.html', {'form': form, 'rec_ing_form':rec_ing_form})
 
     if request.method == 'POST':
         if request.user.is_authenticated:
+            form = RecetaForm(request.POST or None, request.FILES)
+            rec_ing_form= RecetaIngredienteFormSet(request.POST or None)
 
-            if 'ingre' in request.POST: 
-                print("OLA")
-                nombre = request.POST["ingrediente_nombre"]
-                vegetariano = bool(request.POST.get('Vegetariano', False))
-                vegano = bool(request.POST.get('Vegano', False))
-                diabetico = bool(request.POST.get('Diabetico', False))
-                celiaco = bool(request.POST.get('Celiaco', False))
-                intolerancia_lactosa = bool(request.POST.get('int_lactosa', False))
-                nuevo_ingre = Ingrediente(ingrediente_nombre=nombre, vegano=vegano, vegetariano=vegetariano, diabetico=diabetico, celiaco=celiaco, int_lactosa= intolerancia_lactosa)
-                nuevo_ingre.save()
+            if form.is_valid() and rec_ing_form.is_valid():
+                nueva_receta=form.save(user=request.user, commit=False)
+                for rec_ing in rec_ing_form:
+                    print(rec_ing.is_valid())
+                    if rec_ing.is_valid():
+                        print(rec_ing.cleaned_data)
+                        rec_ing.save(receta=nueva_receta, commit=False)
+                return HttpResponseRedirect('/')
 
-            else:
-                print("CHAO")
-                form = RecetaForm(request.POST or None)
-                rec_ing_form= RecetaIngredienteForm(request.Post)
-
-                if form.is_valid() and rec_ing_form.is_valid():
-                    nueva_receta=form.save(user=request.user, commit=False)
-                    
-                    rec_ing_form.save(receta=nueva_receta.receta_id)
-                    return HttpResponseRedirect('/')
-
-                return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
+            return render(request, 'chefcitoapp/agregar_receta.html', {'form': form})
 
 
 def todas_recetas(request):
@@ -212,11 +203,30 @@ def todas_recetas(request):
 def vista_receta(request, receta_id):
     try:
         receta=Receta.objects.get(receta_id=receta_id)
+        receta_ingredientes=RecetaIngrediente.objects.filter(receta_id=receta_id)
+        ingredientes=[]
+        for ri in receta_ingredientes:
+            ingredientes.append([ri.ingrediente_id, ri.unidad, ri.medida])
+        nombre_ingredientes=[]
+        for i in ingredientes:
+            nombre_ingredientes.append(i[0].ingrediente_nombre+" - "+str(i[1])+" "+i[2])
     except Receta.DoesNotExist:
         receta = None
 
     if receta!=None:
-        return render(request, 'chefcitoapp/vista_receta_alt.html', {"receta": receta})
+        return render(request, 'chefcitoapp/vista_receta_alt.html', {"receta": receta, "nombre_ingredientes":nombre_ingredientes})
     else:
         return render(request, 'chefcitoapp/receta_no_valida.html')
 
+def agregar_ingrediente(request):
+    if request.method == 'GET':
+        form = IngredienteForm()
+        return render(request, 'chefcitoapp/agregar_ingrediente.html', {'form': form})
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            form = IngredienteForm(request.POST or None)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            return render(request, 'chefcitoapp/agregar_ingrediente.html', {'form': form})

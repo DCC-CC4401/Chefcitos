@@ -14,4 +14,5 @@ urlpatterns = [
     path('agregar_receta/', views.agregar_receta, name='agregar_receta'), 
     path('todas_recetas/', views.todas_recetas, name='recetas'),
     path('receta/<int:receta_id>/', views.vista_receta, name='ver_receta'),
+    path('agregar_ingrediente/', views.agregar_ingrediente, name='agregar_ingrediente'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

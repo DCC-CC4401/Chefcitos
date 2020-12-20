@@ -21,7 +21,7 @@ function date() {
     if (!document.getElementById("downalphabet").className.match(/(?:^|\s)d-none(?!\S)/)){
         document.getElementById("downalphabet").className += " d-none";
     }
-    if (!document.getElementById("alphabet").className.match(/(?:^|\s)d-none(?!\S)/)){
+    if (!document.getElementById("alphabet").className.match(/(?:^|s)d-none(?!\S)/)){
         document.getElementById("alphabet").className += " d-none";
     }
     if (!document.getElementById("downdate").className.match(/(?:^|\s)d-none(?!\S)/)){
@@ -81,3 +81,15 @@ $('.dropdown.keep-open').on({
     "click":             function() { this.closable = true; },
     "hide.bs.dropdown":  function() { return this.closable; }
 });
+
+
+function add_ingrediente_function() {
+    let valor = parseInt(document.getElementById('id_form-TOTAL_FORMS').value) + 1;
+    document.getElementById('id_form-TOTAL_FORMS').value=String(valor);
+
+    let formRegex = RegExp(`form-(\\d){1}-`,'g')
+
+    let ingrediente_form=document.getElementsByClassName('ingrediente_container')[0].innerHTML.replace(formRegex, `form-${valor-1}-`);
+    document.getElementById('anadir_ingrediente_form').innerHTML+=ingrediente_form;
+
+}
