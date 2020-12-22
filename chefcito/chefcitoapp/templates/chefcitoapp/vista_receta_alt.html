@@ -1,6 +1,6 @@
 {% extends 'chefcitoapp/menu.html' %}
 
-{% block title %} Registrar usuario {% endblock %}
+{% block title %} {{receta.receta_nombre}} {% endblock %}
 
 {%block content %}
 
@@ -10,7 +10,7 @@
         <div class="card">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-5">
 						{% if receta.receta_foto %}
 							<div><img class="imagen-receta" src="{{ receta.receta_foto.url }}"></div>
 						{% else %}
@@ -19,17 +19,17 @@
 					</div>
 
 
-					<div class="col-sm-6">
+					<div class="col-sm-7">
 						<div class="row">
 							<div class="col-sm-12 titulo-receta">
 								<strong>{{receta.receta_nombre}}</strong>
 							</div>
 
 							<div class="col-sm-12 descr">
-								{{receta.descripcion}}
+								{{receta.descripcion|linebreaks}}
 							</div>
 
-							<div class="col-sm-6">
+							<div class="col-sm-7">
 							<div class="card ingr-prep-card">
 								<div class="card-header"><strong>Ingredientes:</strong></div>
 								<div class="card-body">
@@ -44,7 +44,7 @@
 
 
 
-							<div class="col-sm-6">
+							<div class="col-sm-5">
 								<div class="extra-inf"><img class="iconos-receta" src="../../static/chefcitoapp/img/preparacion_icono.png"> <strong>{{ receta.duracion}} mins</strong></div>
 								<div class="extra-inf"><label> <strong>Fecha de Preparación:</strong><div>{{ receta.fecha_publ |date:"M d, Y" }}</div></label></div>
 								<div class="extra-inf"><label><strong>Creado por:</strong><br>
@@ -77,7 +77,7 @@
 						<div class="grid-child">
 							<div class="card ingr-prep-card">
 								<div class="card-header"><strong>Preparación</strong></div>
-								{{receta.preparacion}}
+								{{receta.preparacion|linebreaks}}
 							</div>
 						</div>
 					</div>

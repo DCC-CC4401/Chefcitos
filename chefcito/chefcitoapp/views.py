@@ -228,5 +228,5 @@ def agregar_ingrediente(request):
             form = IngredienteForm(request.POST or None)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/agregar_ingrediente')
             return render(request, 'chefcitoapp/agregar_ingrediente.html', {'form': form})
